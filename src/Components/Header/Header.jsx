@@ -1,8 +1,10 @@
 import React from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import NavBerButton from "../SliderButton/NavBerButton";
 
 const Header = () => {
+  const {pathname} = useLocation();
+  
   const links = (
     <>
       <li>
@@ -49,7 +51,7 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className={`${pathname === '/' && 'text-white'}menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 `}
             >
               {links}
             </ul>
@@ -59,11 +61,11 @@ const Header = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
+          <ul className={`menu menu-horizontal px-1 text-accent ${pathname === '/' && 'text-white'}`}>{links}</ul>
         </div>
         <div className="navbar-end">
-          <Link>
-            <NavBerButton level={`Sign In`}></NavBerButton>
+          <Link to={`${pathname === '/signin' ? '/signup' : '/signin'}`}>
+            <NavBerButton level={`${pathname == '/signin' ? 'Sign Up' : 'Sign In'}`}></NavBerButton>
           </Link>
         </div>
       </div>
