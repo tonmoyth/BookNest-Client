@@ -1,10 +1,12 @@
 import React from 'react';
 import Banner from './Banner/Banner';
+import Map from './Map';
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
+            <Map></Map>
         </div>
     );
 };

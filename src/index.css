@@ -6,3 +6,11 @@
 *{
     font-family: "Roboto", sans-serif;
 }
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: oklch(51.1% 0.262 276.966);
+  --color-secondary: oklch(85% 0.13 145);
+  --color-accent: #1F2937;
+}

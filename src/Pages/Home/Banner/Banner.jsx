@@ -16,12 +16,16 @@ import "./styles.css";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 import { Link, NavLink } from "react-router";
 import SliderButton from "../../../Components/SliderButton/SliderButton";
+import NavBerButton from "../../../Components/SliderButton/NavBerButton";
+import { FaUser } from "react-icons/fa";
 
 const Banner = () => {
   const links = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink 
+        className={({isActive})=> isActive && 'border-b-2 border-primary'}
+        to="/">Home</NavLink>
       </li>
       <li>
         <NavLink to="/rooms">Rooms</NavLink>
@@ -61,13 +65,15 @@ const Banner = () => {
               {links}
             </ul>
           </div>
-          <Link className="font-bold text-xl">BookNest</Link>
+          <Link className="text-2xl">Book<span className="text-primary font-bold">Nest</span></Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          <Link>
+            <NavBerButton level={`Sign In`}></NavBerButton>
+          </Link>
         </div>
       </div>
       {/* slider */}
