@@ -1,12 +1,61 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../Context/AuthContext/AuthContext";
+import Swal from "sweetalert2";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignIn = () => {
+  const [passShow, setPassShow] = useState(false);
+  const { userSignIn, userSignUpGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  // handle Form
+  const handleSignInForm = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    userSignIn(email, password)
+      .then(() => {
+        navigate("/");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Sign Up successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err.message}`,
+        });
+      });
+  };
+
+  // handle google button
+  const handleGoogleButton = () => {
+    userSignUpGoogle()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err.message}`,
+        });
+      });
+  };
+
   return (
     <div className="min-h-[calc(100vh-65px)] bg-secondary flex justify-center items-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-        <form className="space-y-6">
+        <form onSubmit={handleSignInForm} className="space-y-6">
           <div className="space-y-1 text-sm">
             <label htmlFor="email" className="block dark:text-gray-600">
               Enter Your Email
@@ -15,21 +64,27 @@ const SignIn = () => {
               type="text"
               name="email"
               id="email"
-              placeholder="Name"
+              placeholder="Email"
               className="w-full px-4 py-3 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             />
           </div>
-          <div className="space-y-1 text-sm">
+          <div className="space-y-1 text-sm relative">
             <label htmlFor="password" className="block dark:text-gray-600">
               Password
             </label>
             <input
-              type="password"
+              type={passShow ? "text" : "password"}
               name="password"
               id="password"
               placeholder="Password"
               className="w-full px-4 py-3 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             />
+            <p
+              onClick={() => setPassShow((prev) => !prev)}
+              className="absolute top-9 right-4"
+            >
+              {passShow ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+            </p>
           </div>
           <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 bg-primary">
             Sign in
@@ -43,7 +98,10 @@ const SignIn = () => {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button className="btn bg-white text-black border-[#e5e5e5]">
+          <button
+            onClick={handleGoogleButton}
+            className="btn bg-white text-black border-[#e5e5e5]"
+          >
             <svg
               aria-label="Google logo"
               width="16"
@@ -77,7 +135,7 @@ const SignIn = () => {
         <p className="text-xs text-center sm:px-6 dark:text-gray-600">
           Don't have an account?
           <Link
-          to='/signup'
+            to="/signup"
             rel="noopener noreferrer"
             href="#"
             className="underline text-primary"

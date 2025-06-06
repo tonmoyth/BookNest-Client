@@ -1,13 +1,105 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../Context/AuthContext/AuthContext";
+import { auth } from "../../Firebase/firebase.cofig";
+import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const [passShow, setPassShow] = useState(false);
+  const { userCreateEmailAndPass, setUser, userSignUpGoogle } =
+    useContext(AuthContext);
+  
+  const navigate = useNavigate();
+
+  // handle form
+  const handleSignUpForm = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const newUser = Object.fromEntries(formData.entries());
+    const updateDoc = { displayName: newUser.name, photoURL: newUser.photo };
+
+    if (!/[A-Z]/.test(newUser.password)) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Must have an Uppercase letter in the password",
+      });
+
+      return;
+    } else if (!/[a-z]/.test(newUser.password)) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Must have a Lowercase letter in the password",
+      });
+
+      return;
+    } else if (newUser.password.length < 6) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Length must be at least 6 characters",
+      });
+
+      return;
+    } else {
+      userCreateEmailAndPass(newUser.email, newUser.password)
+        .then((result) => {
+          const updated = { ...result, ...updateDoc };
+          updateProfile(auth.currentUser, updateDoc)
+            .then(() => {
+              setUser(updated);
+              navigate('/')
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Sign Up successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            })
+            .catch((err) => {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `${err.message}`,
+              });
+            });
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${err.message}`,
+          });
+        });
+    }
+  };
+
+  // handle google button
+  const handleGoogleButton = () => {
+    userSignUpGoogle()
+      .then(() => {
+        navigate('/')
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err.message}`,
+        });
+      });
+  };
+
   return (
     <div className="min-h-[calc(100vh-65px)] bg-secondary flex justify-center items-center">
       <div className="w-full my-10 max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800">
         <h1 className="text-2xl font-bold text-center">Sign Up</h1>
-        <form className="space-y-6">
-            {/* name input */}
+        <form onSubmit={handleSignUpForm} className="space-y-6">
+          {/* name input */}
           <div className="space-y-1 text-sm">
             <label htmlFor="name" className="block dark:text-gray-600">
               Enter Your Name
@@ -15,6 +107,7 @@ const SignUp = () => {
             <input
               type="text"
               name="name"
+              required
               id="name"
               placeholder="Name"
               className="w-full px-4 py-3 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
@@ -28,11 +121,13 @@ const SignUp = () => {
             <input
               type="text"
               name="email"
+              required
               id="email"
               placeholder="Email"
               className="w-full px-4 py-3 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             />
           </div>
+          {/* photo url */}
           <div className="space-y-1 text-sm">
             <label htmlFor="name" className="block dark:text-gray-600">
               Photo URL
@@ -40,22 +135,31 @@ const SignUp = () => {
             <input
               type="text"
               name="photo"
+              required
               id="photo"
               placeholder="Photo"
               className="w-full px-4 py-3 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             />
           </div>
-          <div className="space-y-1 text-sm">
+          {/* password */}
+          <div className="space-y-1 text-sm relative">
             <label htmlFor="password" className="block dark:text-gray-600">
               Password
             </label>
             <input
-              type="password"
+              type={passShow ? "text" : "password"}
               name="password"
+              required
               id="password"
               placeholder="Password"
               className="w-full px-4 py-3 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             />
+            <p
+              onClick={() => setPassShow((prev) => !prev)}
+              className="absolute top-9 right-4"
+            >
+              {passShow ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+            </p>
           </div>
           <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 bg-primary">
             Sign Up
@@ -69,7 +173,10 @@ const SignUp = () => {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button className="btn bg-white text-black border-[#e5e5e5]">
+          <button
+            onClick={handleGoogleButton}
+            className="btn bg-white text-black border-[#e5e5e5]"
+          >
             <svg
               aria-label="Google logo"
               width="16"
