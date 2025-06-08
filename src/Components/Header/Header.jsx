@@ -94,7 +94,7 @@ const Header = () => {
             </ul>
           </div>
           <Link className="text-2xl">
-            Book<span className="text-primary font-bold">Nest</span>
+            <span className="text-accent">Book</span><span className="text-primary font-bold">Nest</span>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
