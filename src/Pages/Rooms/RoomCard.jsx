@@ -18,13 +18,14 @@ const RoomCard = ({ room }) => {
           <p className="text-accent mb-3">{description}</p>
 
           <ul className="text-sm text-accent space-y-1 mb-4">
-            <li><strong>Price:</strong> {pricePerNight} / night</li>
+            <li><strong>Price:</strong> {pricePerNight} / Per Night</li>
             <li><strong>Size:</strong> {roomSize}</li>
             <li><strong>View:</strong> {view}</li>
+           
           </ul>
 
           <div className="text-primary font-medium mb-2">
-            ⭐ {rating} ({reviews} reviews)
+            ⭐ {rating} ({reviews.length} reviews)
           </div>
 
          
