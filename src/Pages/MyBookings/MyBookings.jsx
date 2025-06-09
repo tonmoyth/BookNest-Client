@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { ImCancelCircle } from "react-icons/im";
 import StarRatings from "react-star-ratings";
+import NavBerButton from "../../Components/SliderButton/NavBerButton";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
@@ -11,6 +12,8 @@ const MyBookings = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const ref = useRef();
+  const [date, setDate] = useState("");
+  const [dateErr, setDateErr] = useState(false);
 
   useEffect(() => {
     axios(`${import.meta.env.VITE_SERVER_URL}/booking?email=${user?.email}`)
@@ -84,8 +87,8 @@ const MyBookings = () => {
       })
       .then((res) => {
         if (res.data.acknowledged) {
-          const modalOff = document.getElementById("my_modal_3")
-          modalOff.close()
+          const modalOff = document.getElementById("my_modal_3");
+          modalOff.close();
           Swal.fire({
             position: "center",
             icon: "success",
@@ -96,14 +99,49 @@ const MyBookings = () => {
         }
       })
       .catch((err) => {
-        const modalOff = document.getElementById("my_modal_3")
-          modalOff.close()
+        const modalOff = document.getElementById("my_modal_3");
+        modalOff.close();
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: `${err.message}`,
         });
       });
+  };
+
+  // handle Update date
+  const handleUpdateDate = (bookedId) => {
+    if (date === "") {
+      return setDateErr(true);
+    } else {
+      axios
+        .patch(`${import.meta.env.VITE_SERVER_URL}/dateUpdate`, {
+          date,
+          bookedId,
+        })
+        .then((res) => {
+          if (res.data.acknowledged) {
+            const modalOff = document.getElementById(`my_modal_${bookedId}`);
+            modalOff.close();
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Date Update Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch((err) => {
+          const modalOff = document.getElementById(`my_modal_${bookedId}`);
+          modalOff.close();
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${err.message}`,
+          });
+        });
+    }
   };
   return (
     <div>
@@ -121,7 +159,9 @@ const MyBookings = () => {
               <th>Room Size</th>
               <th>Bed Type</th>
               <th>View</th>
-              <th>Action</th>
+              <th>Cancel</th>
+              <th>Review</th>
+              <th>Update date</th>
             </tr>
           </thead>
           <tbody>
@@ -149,7 +189,7 @@ const MyBookings = () => {
                 <td>{data?.roomSize}</td>
                 <td>{data?.bedType}</td>
                 <td>{data?.view}</td>
-                <th className="flex gap-4">
+                <th>
                   {/* cancel button */}
                   <button
                     onClick={() => handleCancelButton(data?._id, data?.id)}
@@ -157,7 +197,9 @@ const MyBookings = () => {
                   >
                     <ImCancelCircle size={20} />
                   </button>
+                </th>
 
+                <td>
                   {/* review modal */}
 
                   {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -233,7 +275,47 @@ const MyBookings = () => {
                       </form>
                     </div>
                   </dialog>
-                </th>
+                </td>
+                <td>
+                  {/* Update date modal */}
+                  {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                  <button
+                    className="btn"
+                    onClick={() =>
+                      document.getElementById(`my_modal_${data._id}`).showModal()
+                    }
+                  >
+                    Update Date
+                  </button>
+                  <dialog id={`my_modal_${data._id}`} className="modal">
+                    <div className="modal-box">
+                      <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                      <h3 className="font-bold text-lg text-center mb-6">
+                        Update Date
+                      </h3>
+                      <input
+                        onChange={(e) => setDate(e.target.value)}
+                        type="date"
+                        required
+                        className="input w-full border"
+                      />
+                      <p className="text-red-500 font-bold mt-2">
+                        {dateErr && "Please select date"}
+                      </p>
+                      <div className="flex justify-center mt-6">
+                        <NavBerButton
+                          onClick={() => handleUpdateDate(data._id)}
+                          level="Update Date"
+                        ></NavBerButton>
+                      </div>
+                    </div>
+                  </dialog>
+                </td>
               </tr>
             ))}
           </tbody>
