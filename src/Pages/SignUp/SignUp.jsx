@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router";
+import { Link,  useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import { auth } from "../../Firebase/firebase.cofig";
 import { updateProfile } from "firebase/auth";
@@ -10,7 +10,6 @@ const SignUp = () => {
   const [passShow, setPassShow] = useState(false);
   const { userCreateEmailAndPass, setUser, userSignUpGoogle } =
     useContext(AuthContext);
-  
   const navigate = useNavigate();
 
   // handle form

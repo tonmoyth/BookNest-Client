@@ -1,8 +1,9 @@
 import React from 'react';
 import NavBerButton from '../../../Components/SliderButton/NavBerButton';
+import { Link } from 'react-router';
 
 const FeaturedRoomCard = ({room}) => {
-    const {image,roomType,rating,description} = room
+    const {_id,image,roomType,rating,description} = room
     return (
         <div className="card bg-base-100 shadow-xl rounded-xl my-6 overflow-hidden">
       <figure className="relative">
@@ -23,7 +24,9 @@ const FeaturedRoomCard = ({room}) => {
         </p>
 
         <div className="card-actions justify-start mt-3">
-          <NavBerButton level='Book Now'></NavBerButton>
+          <Link to={`room/${_id}`}>
+            <NavBerButton level='Book Now'></NavBerButton>
+          </Link>
         </div>
       </div>
     </div>

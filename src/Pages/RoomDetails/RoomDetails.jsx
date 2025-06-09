@@ -2,41 +2,50 @@ import { useLoaderData } from "react-router";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useContext,  useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 
 const RoomDetails = () => {
   const { data: room } = useLoaderData();
-  const [update,setUpdate] = useState(false);
-  const {user} = useContext(AuthContext);
-  const [date,setDate] = useState('');
-  
+  const [update, setUpdate] = useState(false);
+  const { user } = useContext(AuthContext);
+  const [date, setDate] = useState("");
 
   const handleConfirmButton = () => {
-   
-    
-      axios
-        .post(`${import.meta.env.VITE_SERVER_URL}/status/${room._id}`,{email: user?.email,date})
-        .then((res) => {
-          if (res.data.acknowledged) {
-            const modal = document.getElementById("my_modal_3");
-            modal.close()
-            setUpdate(true)
-            Swal.fire({
-              title: "Successfully",
-              text: "Booking Successfully",
-              icon: "success",
-            });
-          }
-        })
-        .catch((err) => {
+    if (date === "") {
+      const modal = document.getElementById("my_modal_3");
+      modal.close();
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please select date",
+      });
+      return;
+    }
+    axios
+      .post(`${import.meta.env.VITE_SERVER_URL}/status/${room._id}`, {
+        email: user?.email,
+        date,
+      })
+      .then((res) => {
+        if (res.data.acknowledged) {
+          const modal = document.getElementById("my_modal_3");
+          modal.close();
+          setUpdate(true);
           Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `${err.message}`,
+            title: "Successfully",
+            text: "Booking Successfully",
+            icon: "success",
           });
+        }
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err.message}`,
         });
-    
+      });
   };
   return (
     <div className="max-w-5xl mx-auto p-4 space-y-6">
@@ -151,7 +160,12 @@ const RoomDetails = () => {
               <strong>View:</strong> {room.view}
             </p>
           </div>
-          <input onChange={(e) => setDate(e.target.value)} type="date" className="input w-full border" />
+          <input
+            onChange={(e) => setDate(e.target.value)}
+            type="date"
+            required
+            className="input w-full border"
+          />
           <div className="text-center">
             {room.status === "unavailable" || update === true ? (
               <button className="btn mt-4" disabled="disabled">

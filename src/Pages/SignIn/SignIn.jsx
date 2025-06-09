@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -8,6 +8,8 @@ const SignIn = () => {
   const [passShow, setPassShow] = useState(false);
   const { userSignIn, userSignUpGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
+  const {state} = useLocation();
+ 
 
   // handle Form
   const handleSignInForm = (e) => {
@@ -18,7 +20,7 @@ const SignIn = () => {
 
     userSignIn(email, password)
       .then(() => {
-        navigate("/");
+        navigate(state || '/');
         Swal.fire({
           position: "center",
           icon: "success",
@@ -40,7 +42,7 @@ const SignIn = () => {
   const handleGoogleButton = () => {
     userSignUpGoogle()
       .then(() => {
-        navigate("/");
+       navigate(state || '/');
       })
       .catch((err) => {
         Swal.fire({

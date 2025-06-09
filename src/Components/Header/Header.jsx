@@ -55,9 +55,9 @@ const Header = () => {
       <li>
         <NavLink
           className={({ isActive }) => isActive && "border-b-2 border-primary"}
-          to="/my_rooms"
+          to="/my_bookings"
         >
-          My Rooms
+          My Bookings
         </NavLink>
       </li>
     </>

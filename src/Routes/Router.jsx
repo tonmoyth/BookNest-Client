@@ -2,11 +2,12 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home/Home";
 import Rooms from "../Pages/Rooms/Rooms";
-import MyRooms from "../Pages/MyRooms/MyRooms";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import axios from "axios";
 import RoomDetails from "../Pages/RoomDetails/RoomDetails";
+import MyBookings from "../Pages/MyBookings/MyBookings";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -28,8 +29,8 @@ export const router = createBrowserRouter([
                 Component: RoomDetails
             },
             {
-                path: 'my_rooms',
-                element: MyRooms
+                path: 'my_bookings',
+                element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
             },
             {
                 path: 'signin',
