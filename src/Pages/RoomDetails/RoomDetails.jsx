@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import {  useLoaderData, useLocation, useNavigate } from "react-router";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -10,6 +10,8 @@ const RoomDetails = () => {
   const [update, setUpdate] = useState(false);
   const { user } = useContext(AuthContext);
   const [date, setDate] = useState("");
+  const navigate = useNavigate()
+  const { pathname } = useLocation();
 
   const handleConfirmButton = () => {
     if (date === "") {
@@ -46,6 +48,15 @@ const RoomDetails = () => {
           text: `${err.message}`,
         });
       });
+  };
+
+  // handle book now button
+  const handleBookNowButton = () => {
+    
+    if (!user) {
+      return navigate('/signin', {state:  pathname})
+    }
+    document.getElementById("my_modal_3").showModal();
   };
   return (
     <div className="max-w-5xl mx-auto p-4 space-y-6">
@@ -114,7 +125,7 @@ const RoomDetails = () => {
                   {rev.comment}
                 </p>
                 <p>
-                  <strong> {rev.timestamp && 'time stamp:'} </strong>
+                  <strong> {rev.timestamp && "time stamp:"} </strong>
                   {rev.timestamp && rev.timestamp}
                 </p>
               </div>
@@ -130,7 +141,7 @@ const RoomDetails = () => {
 
       <button
         className="btn w-full bg-primary text-white"
-        onClick={() => document.getElementById("my_modal_3").showModal()}
+        onClick={handleBookNowButton}
       >
         Book Now
       </button>
