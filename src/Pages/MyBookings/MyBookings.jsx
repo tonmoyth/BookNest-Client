@@ -1,12 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { ImCancelCircle } from "react-icons/im";
+import StarRatings from "react-star-ratings";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
   const [bookedData, setBookedData] = useState([]);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const ref = useRef();
 
   useEffect(() => {
     axios(`${import.meta.env.VITE_SERVER_URL}/booking?email=${user?.email}`)
@@ -64,6 +68,43 @@ const MyBookings = () => {
     });
   };
 
+  const handleReviewForm = (roomId) => {
+    const timestamp = new Date().toISOString();
+    const name = ref.current.value;
+    const ratingNumber = rating;
+    const reviewComment = comment;
+
+    axios
+      .patch(`${import.meta.env.VITE_SERVER_URL}/reviews`, {
+        timestamp,
+        name,
+        ratingNumber,
+        reviewComment,
+        roomId,
+      })
+      .then((res) => {
+        if (res.data.acknowledged) {
+          const modalOff = document.getElementById("my_modal_3")
+          modalOff.close()
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Review Send Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((err) => {
+        const modalOff = document.getElementById("my_modal_3")
+          modalOff.close()
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err.message}`,
+        });
+      });
+  };
   return (
     <div>
       <h1 className="text-accent text-4xl text-center">My All Booking </h1>
@@ -108,13 +149,90 @@ const MyBookings = () => {
                 <td>{data?.roomSize}</td>
                 <td>{data?.bedType}</td>
                 <td>{data?.view}</td>
-                <th>
+                <th className="flex gap-4">
+                  {/* cancel button */}
                   <button
                     onClick={() => handleCancelButton(data?._id, data?.id)}
                     className="hover:text-primary"
                   >
                     <ImCancelCircle size={20} />
                   </button>
+
+                  {/* review modal */}
+
+                  {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                  <button
+                    className="btn"
+                    onClick={() =>
+                      document.getElementById("my_modal_3").showModal()
+                    }
+                  >
+                    Review
+                  </button>
+                  <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box">
+                      <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                      <h3 className="font-bold text-lg text-center">Review</h3>
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          handleReviewForm(data?.id);
+                        }}
+                      >
+                        {/* Username */}
+                        <div className="mb-3">
+                          <label className="label">Username</label>
+                          <input
+                            ref={ref}
+                            type="text"
+                            name="username"
+                            value={user?.displayName}
+                            readOnly
+                            className="input input-bordered w-full"
+                          />
+                        </div>
+
+                        {/* Rating */}
+                        <div className="mb-3">
+                          <label className="label">Rating (1 to 5)</label>
+                          <br />
+                          <StarRatings
+                            rating={rating}
+                            starRatedColor="#facc15"
+                            changeRating={(newRating) => setRating(newRating)}
+                            numberOfStars={5}
+                            starDimension="30px"
+                            starSpacing="5px"
+                            name="rating"
+                          />
+                        </div>
+
+                        {/* Comment */}
+                        <div className="mb-3">
+                          <label className="label">Comment</label>
+                          <textarea
+                            className="textarea textarea-bordered w-full"
+                            rows={3}
+                            name="comment"
+                            placeholder="Write your review..."
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                          ></textarea>
+                        </div>
+
+                        <input
+                          className="btn w-full bg-primary text-white"
+                          type="submit"
+                          value="Submit Review"
+                        />
+                      </form>
+                    </div>
+                  </dialog>
                 </th>
               </tr>
             ))}

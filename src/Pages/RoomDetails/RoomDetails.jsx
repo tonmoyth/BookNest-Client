@@ -110,8 +110,12 @@ const RoomDetails = () => {
                   <strong>Rating: </strong>⭐ ({rev.rating})
                 </p>
                 <p>
-                  <strong>Comment:</strong>
+                  <strong>Comment: </strong>
                   {rev.comment}
+                </p>
+                <p>
+                  <strong> {rev.timestamp && 'time stamp:'} </strong>
+                  {rev.timestamp && rev.timestamp}
                 </p>
               </div>
             ))
