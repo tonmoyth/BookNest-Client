@@ -8,11 +8,13 @@ import axios from "axios";
 import RoomDetails from "../Pages/RoomDetails/RoomDetails";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../Components/404page/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: '/',
         Component:MainLayout,
+        ErrorBoundary: ErrorPage,
         children: [
             {
                 index:true,
