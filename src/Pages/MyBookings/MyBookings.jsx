@@ -144,7 +144,7 @@ const MyBookings = () => {
     }
   };
   return (
-    <div>
+    <div className="min-h-[calc(100vh-65px)]">
       <h1 className="text-accent text-4xl text-center">My All Booking </h1>
 
       <div className="overflow-x-auto w-11/12 mx-auto my-6">

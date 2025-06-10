@@ -11,7 +11,7 @@ const MainLayout = () => {
                 pathname === '/' ? '' : <Header></Header>
             }
             <Outlet></Outlet>
-            {/* <Footer></Footer> */}
+            <Footer></Footer>
         </div>
     );
 };
