@@ -3,6 +3,7 @@ import Map from './Map';
 import FeaturedRooms from './FeaturedRooms/FeaturedRooms';
 import OurHotel from './OurHotel/OurHotel';
 import Service from './Service/Service';
+import ReviewTestimonial from './ReviewTestimonial/ReviewTestimonial';
 
 const Home = () => {
     return (
@@ -11,8 +12,8 @@ const Home = () => {
             {/* <Map></Map> */}
             <OurHotel></OurHotel>
             <FeaturedRooms></FeaturedRooms>
-            
             <Service></Service>
+            <ReviewTestimonial></ReviewTestimonial>
         </div>
     );
 };
