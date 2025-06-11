@@ -6,6 +6,7 @@ import { ImCancelCircle } from "react-icons/im";
 import StarRatings from "react-star-ratings";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import moment from "moment/moment";
+import AxiosInterceptor from "../../Hooks/AxiosInterceptor/AxiosInterceptor";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
@@ -15,9 +16,13 @@ const MyBookings = () => {
   const ref = useRef();
   const [date, setDate] = useState("");
   const [dateErr, setDateErr] = useState(false);
+  const instance = AxiosInterceptor();
+  
+
+
 
   useEffect(() => {
-    axios(`${import.meta.env.VITE_SERVER_URL}/booking?email=${user?.email}`)
+    instance(`/booking?email=${user?.email}`)
       .then((res) => {
         setBookedData(res.data);
       })
@@ -28,7 +33,7 @@ const MyBookings = () => {
           text: `${err.message}`,
         });
       });
-  }, [user]);
+  }, [user,instance]);
 
   // cancel button
   const handleCancelButton = (_id, id, date) => {
