@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { ImCancelCircle } from "react-icons/im";
 import StarRatings from "react-star-ratings";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
+import moment from "moment/moment";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
@@ -29,46 +30,59 @@ const MyBookings = () => {
       });
   }, [user]);
 
-  const handleCancelButton = (_id, id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .delete(`${import.meta.env.VITE_SERVER_URL}/bookingDelete`, {
-            data: {
-              bookedId: _id,
-              roomId: id,
-            },
-          })
-          .then((res) => {
-            if (res.data.acknowledged) {
-              const selectBooked = bookedData.filter(
-                (booked) => booked._id !== _id
-              );
-              setBookedData(selectBooked);
+  // cancel button
+  const handleCancelButton = (_id, id, date) => {
+    const bookingDate = moment(date);
+    const cancelDeadline = bookingDate.clone().subtract(2, "day");
+    const today = moment().startOf("day");
+
+    if (today.isSameOrBefore(cancelDeadline)) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`${import.meta.env.VITE_SERVER_URL}/bookingDelete`, {
+              data: {
+                bookedId: _id,
+                roomId: id,
+              },
+            })
+            .then((res) => {
+              if (res.data.acknowledged) {
+                const selectBooked = bookedData.filter(
+                  (booked) => booked._id !== _id
+                );
+                setBookedData(selectBooked);
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success",
+                });
+              }
+            })
+            .catch((err) => {
               Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success",
+                icon: "error",
+                title: "Oops...",
+                text: `${err.message}`,
               });
-            }
-          })
-          .catch((err) => {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: `${err.message}`,
             });
-          });
-      }
-    });
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: 'Cancellation Period Expired',
+      });
+    }
   };
 
   const handleReviewForm = (roomId) => {
@@ -192,7 +206,9 @@ const MyBookings = () => {
                 <th>
                   {/* cancel button */}
                   <button
-                    onClick={() => handleCancelButton(data?._id, data?.id)}
+                    onClick={() =>
+                      handleCancelButton(data?._id, data?.id, data?.date)
+                    }
                     className="hover:text-primary"
                   >
                     <ImCancelCircle size={20} />
@@ -282,7 +298,9 @@ const MyBookings = () => {
                   <button
                     className="btn"
                     onClick={() =>
-                      document.getElementById(`my_modal_${data._id}`).showModal()
+                      document
+                        .getElementById(`my_modal_${data._id}`)
+                        .showModal()
                     }
                   >
                     Update Date
