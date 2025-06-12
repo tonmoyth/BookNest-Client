@@ -12,12 +12,12 @@ const RoomCard = ({ room }) => {
       </div>
 
       {/* Room Content */}
-      <div className="p-6 md:w-1/2 flex flex-col justify-between">
+      <div className="p-6 md:w-1/2 flex flex-col bg-accent-content text-primary justify-between">
         <div>
           <h2 className="text-2xl font-bold mb-2">{roomType} Room</h2>
-          <p className="text-accent mb-3">{description}</p>
+          <p className=" mb-3">{description}</p>
 
-          <ul className="text-sm text-accent space-y-1 mb-4">
+          <ul className="text-sm  space-y-1 mb-4">
             <li><strong>Price:</strong> {pricePerNight} / Per Night</li>
             <li><strong>Size:</strong> {roomSize}</li>
             <li><strong>View:</strong> {view}</li>

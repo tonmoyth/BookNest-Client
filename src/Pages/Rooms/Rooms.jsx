@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router";
 import RoomCard from "./RoomCard";
 import { useEffect, useState } from "react";
+import NavBerButton from "../../Components/SliderButton/NavBerButton";
 
 const Rooms = () => {
   const { data } = useLoaderData();
@@ -22,12 +23,13 @@ const Rooms = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-65px)]">
-      <h1 className="text-4xl text-accent text-center font-bold">All rooms</h1>
+    <div className="min-h-[calc(100vh-65px)] bg-accent py-6">
+      
 
       {/* range form */}
       <div>
-        <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800">
+        <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-accent-content">
+          <h1 className="text-3xl font-semibold text-center text-primary">Price range</h1>
           <form onSubmit={handlePriceRangeForm} className="space-y-6">
             <div className="space-y-1 text-sm">
               <input
@@ -49,13 +51,14 @@ const Rooms = () => {
                 className="w-full border px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
               />
             </div>
-            <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-violet-600">
-              Apply Now
+            <button className="w-full">
+              <NavBerButton level='Apply Now'></NavBerButton>
             </button>
+            
           </form>
         </div>
       </div>
-
+      <h1 className="text-4xl text-accent text-center font-bold">All rooms</h1>
       <div className="w-10/12 mx-auto space-y-10 my-6">
         {rooms.map((room) => (
           <RoomCard key={room._id} room={room}></RoomCard>

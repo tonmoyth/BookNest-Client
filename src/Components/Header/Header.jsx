@@ -73,7 +73,7 @@ const Header = () => {
   );
   return (
     <div>
-      <div className="navbar px-8 z-10 text-white relative">
+      <div className={`navbar px-8 z-10 text-primary relative ${pathname === '/' ? '' : 'bg-accent-content text-primary'}`}>
         <div className="navbar-start">
           <Link className="text-2xl">
             <div className="flex gap-1 items-center">
@@ -98,7 +98,7 @@ const Header = () => {
             <div
               className={`${
                 show
-                  ? "absolute transition-all duration-300 ease-in-out top-10 -right-6 bg-primary"
+                  ? "absolute transition-all duration-300 ease-in-out top-12 -right-6 bg-primary"
                   : "hidden"
               } text-black className="h-full p-3 space-y-2 w-60 lg:hidden dark:bg-gray-50 dark:text-gray-800"`}
             >
@@ -237,7 +237,7 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul
             className={`menu menu-horizontal px-1 text-accent ${
-              pathname === "/" && "text-primary-content"
+              pathname === "/" ? "text-primary-content" : "text-primary-content"
             }`}
           >
             {links}

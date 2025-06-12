@@ -2,8 +2,9 @@ import {  useLoaderData, useLocation, useNavigate } from "react-router";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext,  useEffect,  useState } from "react";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
+import Rooms from "../Rooms/Rooms";
 
 const RoomDetails = () => {
   const { data: room } = useLoaderData();
@@ -12,6 +13,13 @@ const RoomDetails = () => {
   const [date, setDate] = useState("");
   const navigate = useNavigate()
   const { pathname } = useLocation();
+  const [show,setShow] = useState(false);
+  const [reviews,setReviews] = useState([]);
+
+
+  useEffect(()=> {
+    setReviews(room.reviews.slice(0,3))
+  },[room])
 
   const handleConfirmButton = () => {
     if (date === "") {
@@ -58,8 +66,21 @@ const RoomDetails = () => {
     }
     document.getElementById("my_modal_3").showModal();
   };
+
+  // handle show more 
+  const handleShow = () => {
+    setShow((prev) => !prev);
+    if(!show){
+      setReviews(room.reviews)
+      
+    }else{
+      const selectReviews = room.reviews.slice(0,3);
+      setReviews(selectReviews)
+    }
+  }
   return (
-    <div className="max-w-5xl mx-auto p-4 space-y-6">
+    <div className="bg-accent text-primary">
+      <div className="max-w-5xl mx-auto p-4 space-y-6">
       {/* Room Image */}
       <img
         src={room.image}
@@ -70,8 +91,8 @@ const RoomDetails = () => {
       {/* Room Info */}
       <div className="space-y-2">
         <h2 className="text-3xl font-bold">{room.roomType} Room</h2>
-        <p className="text-gray-600">{room.description}</p>
-        <div className="grid md:grid-cols-2 gap-4 mt-4 text-sm text-gray-700">
+        <p >{room.description}</p>
+        <div className="grid md:grid-cols-2 gap-4 mt-4 text-sm">
           <p>
             <strong>Price:</strong> {room.pricePerNight} / Per Night
           </p>
@@ -111,7 +132,7 @@ const RoomDetails = () => {
         <h1 className="font-bold mb-2">Reviews ({room.reviews.length || 0})</h1>
         <div>
           {room.reviews.length > 0 ? (
-            room.reviews.map((rev) => (
+            reviews.map((rev) => (
               <div className="mb-4 bg-secondary p-4 rounded-xl">
                 <p>
                   <strong>User : </strong>
@@ -134,28 +155,32 @@ const RoomDetails = () => {
             <p>There are no reviews for this room yet.</p>
           )}
         </div>
+        {
+          room.reviews.length > 0 && <button className="cursor-pointer" onClick={handleShow}>{show ? 'see less' : 'see more'}</button>
+        }
       </div>
 
       {/* modal */}
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
-
+          
       <button
-        className="btn w-full bg-primary text-white"
+        className="btn w-full border-none text-white bg-secondary"
         onClick={handleBookNowButton}
       >
         Book Now
       </button>
 
       <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
+        <div className="modal-box bg-accent-content text-primary">
+          <h1 className="text-2xl font-bold text-center mb-4">Book Now</h1>
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">{room.roomType} room</h3>
-          <div className="grid md:grid-cols-2 gap-4 mt-4 text-sm text-gray-700">
+          <h3 className="font-bold text-lg text-primary-content">{room.roomType} room</h3>
+          <div className="grid md:grid-cols-2 gap-4 mt-4 text-sm ">
             <p>
               <strong>Price:</strong> {room.pricePerNight} / Per Night
             </p>
@@ -179,7 +204,7 @@ const RoomDetails = () => {
             onChange={(e) => setDate(e.target.value)}
             type="date"
             required
-            className="input w-full border"
+            className="input w-full border text-accent my-4"
           />
           <div className="text-center">
             {room.status === "unavailable" || update === true ? (
@@ -195,6 +220,7 @@ const RoomDetails = () => {
           </div>
         </div>
       </dialog>
+    </div>
     </div>
   );
 };

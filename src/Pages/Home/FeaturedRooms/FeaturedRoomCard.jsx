@@ -15,11 +15,11 @@ const FeaturedRoomCard = ({room}) => {
         </div>
       </figure>
 
-      <div className="card-body">
+      <div className="card-body bg-accent-content text-primary">
 
         <h2 className="card-title text-lg font-bold">{roomType}</h2>
 
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-primary-content">
           {description.length > 100 ? description.slice(0, 100) + '...' : description}
         </p>
 

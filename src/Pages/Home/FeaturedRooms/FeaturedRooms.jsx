@@ -12,11 +12,11 @@ const FeaturedRooms = () => {
   }, []);
 
   return (
-    <div className="my-6 w-11/12 mx-auto">
+    <div className="py-6 bg-accent">
       <h1 className="text-2xl lg:text-4xl font-bold text-center text-accent">
         Sleep in Comfort Choose From <br /> Our Rooms & Suites
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {rooms.map((room) => (
           <FeaturedRoomCard key={room._id} room={room}></FeaturedRoomCard>
         ))}

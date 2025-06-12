@@ -13,7 +13,7 @@ const Footer = () => {
             Book <span className="text-primary font-bold">Nest</span>
           </h1>
         </div>
-        <p>
+        <p className="text-primary-content">
           Conveniently fashion market positioning readiness before sticky
           communities. Assertively matrix multif sources through team building.
         </p>
