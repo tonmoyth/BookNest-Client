@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router";
 import { FaFacebook, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import logo from '../../assets/logo.png'
 
 const Footer = () => {
   return (
     <footer className="footer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:footer-horizontal bg-accent text-white  p-10">
       <aside>
         <div>
-          <h1 className="text-2xl md:text-3xl">
+          <h1 className="text-2xl md:text-3xl flex items-center gap-1">
+            <img src={logo} alt="" />
             Book <span className="text-primary font-bold">Nest</span>
           </h1>
         </div>
