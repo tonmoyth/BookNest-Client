@@ -7,6 +7,7 @@ import StarRatings from "react-star-ratings";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import moment from "moment/moment";
 import AxiosInterceptor from "../../Hooks/AxiosInterceptor/AxiosInterceptor";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
@@ -17,9 +18,6 @@ const MyBookings = () => {
   const [date, setDate] = useState("");
   const [dateErr, setDateErr] = useState(false);
   const instance = AxiosInterceptor();
-  
-
-
 
   useEffect(() => {
     instance(`/booking?email=${user?.email}`)
@@ -33,7 +31,7 @@ const MyBookings = () => {
           text: `${err.message}`,
         });
       });
-  }, [user,instance]);
+  }, [user, instance]);
 
   // cancel button
   const handleCancelButton = (_id, id, date) => {
@@ -85,7 +83,7 @@ const MyBookings = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: 'Cancellation Period Expired',
+        text: "Cancellation Period Expired",
       });
     }
   };
@@ -163,13 +161,13 @@ const MyBookings = () => {
     }
   };
   return (
-    <div className="min-h-[calc(100vh-65px)]">
-      <h1 className="text-accent text-4xl text-center">My All Booking </h1>
+    <div className="min-h-[calc(100vh-65px)] bg-accent text-primary">
+      
 
-      <div className="overflow-x-auto w-11/12 mx-auto my-6">
-        <table className="table text-accent">
+      <div className="overflow-x-auto w-11/12 mx-auto py-6">
+        <table className="table ">
           {/* head */}
-          <thead>
+          <thead className="text-primary-content">
             <tr>
               <th>NO</th>
               <th>Room</th>
@@ -178,9 +176,7 @@ const MyBookings = () => {
               <th>Room Size</th>
               <th>Bed Type</th>
               <th>View</th>
-              <th>Cancel</th>
-              <th>Review</th>
-              <th>Update date</th>
+             <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -208,136 +204,157 @@ const MyBookings = () => {
                 <td>{data?.roomSize}</td>
                 <td>{data?.bedType}</td>
                 <td>{data?.view}</td>
-                <th>
-                  {/* cancel button */}
-                  <button
-                    onClick={() =>
-                      handleCancelButton(data?._id, data?.id, data?.date)
-                    }
-                    className="hover:text-primary"
-                  >
-                    <ImCancelCircle size={20} />
-                  </button>
-                </th>
-
                 <td>
-                  {/* review modal */}
-
-                  {/* You can open the modal using document.getElementById('ID').showModal() method */}
-                  <button
-                    className="btn"
-                    onClick={() =>
-                      document.getElementById("my_modal_3").showModal()
-                    }
-                  >
-                    Review
-                  </button>
-                  <dialog id="my_modal_3" className="modal">
-                    <div className="modal-box">
-                      <form method="dialog">
-                        {/* if there is a button in form, it will close the modal */}
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                          ✕
-                        </button>
-                      </form>
-                      <h3 className="font-bold text-lg text-center">Review</h3>
-                      <form
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          handleReviewForm(data?.id);
-                        }}
-                      >
-                        {/* Username */}
-                        <div className="mb-3">
-                          <label className="label">Username</label>
-                          <input
-                            ref={ref}
-                            type="text"
-                            name="username"
-                            value={user?.displayName}
-                            readOnly
-                            className="input input-bordered w-full"
-                          />
-                        </div>
-
-                        {/* Rating */}
-                        <div className="mb-3">
-                          <label className="label">Rating (1 to 5)</label>
-                          <br />
-                          <StarRatings
-                            rating={rating}
-                            starRatedColor="#facc15"
-                            changeRating={(newRating) => setRating(newRating)}
-                            numberOfStars={5}
-                            starDimension="30px"
-                            starSpacing="5px"
-                            name="rating"
-                          />
-                        </div>
-
-                        {/* Comment */}
-                        <div className="mb-3">
-                          <label className="label">Comment</label>
-                          <textarea
-                            className="textarea textarea-bordered w-full"
-                            rows={3}
-                            name="comment"
-                            placeholder="Write your review..."
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                          ></textarea>
-                        </div>
-
-                        <input
-                          className="btn w-full bg-primary text-white"
-                          type="submit"
-                          value="Submit Review"
-                        />
-                      </form>
+                  <div className="dropdown relative">
+                    <div tabIndex={0} role="button" className=" m-1">
+                      <BsThreeDotsVertical className="bg-accent" size={25}/>
                     </div>
-                  </dialog>
-                </td>
-                <td>
-                  {/* Update date modal */}
-                  {/* You can open the modal using document.getElementById('ID').showModal() method */}
-                  <button
-                    className="btn"
-                    onClick={() =>
-                      document
-                        .getElementById(`my_modal_${data._id}`)
-                        .showModal()
-                    }
-                  >
-                    Update Date
-                  </button>
-                  <dialog id={`my_modal_${data._id}`} className="modal">
-                    <div className="modal-box">
-                      <form method="dialog">
-                        {/* if there is a button in form, it will close the modal */}
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                          ✕
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content absolute top-0 right-0 menu bg-accent-content text-primary rounded-box z-10 w-52 p-2 shadow-sm"
+                    >
+                      <li className="hover:bg-secondary">
+                        {/* cancel button */}
+                        <button
+                          onClick={() =>
+                            handleCancelButton(data?._id, data?.id, data?.date)
+                          }
+                          className="hover:text-primary"
+                        >
+                          Cancel
                         </button>
-                      </form>
-                      <h3 className="font-bold text-lg text-center mb-6">
-                        Update Date
-                      </h3>
-                      <input
-                        onChange={(e) => setDate(e.target.value)}
-                        type="date"
-                        required
-                        className="input w-full border"
-                      />
-                      <p className="text-red-500 font-bold mt-2">
-                        {dateErr && "Please select date"}
-                      </p>
-                      <div className="flex justify-center mt-6">
-                        <NavBerButton
-                          onClick={() => handleUpdateDate(data._id)}
-                          level="Update Date"
-                        ></NavBerButton>
-                      </div>
-                    </div>
-                  </dialog>
+                      </li>
+                      <li className="hover:bg-secondary">
+                        {/* review modal */}
+
+                        {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                        <button
+                          
+                          onClick={() =>
+                            document.getElementById("my_modal_3").showModal()
+                          }
+                        >
+                          Review
+                        </button>
+                        
+                      </li>
+
+                      <li className="hover:bg-secondary">
+                        {/* Update date modal */}
+                        {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                        <button
+                          
+                          onClick={() =>
+                            document
+                              .getElementById(`my_modal_${data._id}`)
+                              .showModal()
+                          }
+                        >
+                          Update Date
+                        </button>
+                        
+                      </li>
+                    </ul>
+                    {/* reviews modal */}
+                    <dialog id="my_modal_3" className="modal ">
+                          <div className="modal-box bg-accent-content text-primary">
+                            <form method="dialog">
+                              {/* if there is a button in form, it will close the modal */}
+                              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                ✕
+                              </button>
+                            </form>
+                            <h3 className="font-bold text-lg text-center">
+                              Review
+                            </h3>
+                            <form
+                              onSubmit={(e) => {
+                                e.preventDefault();
+                                handleReviewForm(data?.id);
+                              }}
+                            >
+                              {/* Username */}
+                              <div className="mb-3">
+                                <label className="label">Username</label>
+                                <input
+                                  ref={ref}
+                                  type="text"
+                                  name="username"
+                                  value={user?.displayName}
+                                  readOnly
+                                  className="input text-accent input-bordered w-full"
+                                />
+                              </div>
+
+                              {/* Rating */}
+                              <div className="mb-3">
+                                <label className="label">Rating (1 to 5)</label>
+                                <br />
+                                <StarRatings
+                                  rating={rating}
+                                  starRatedColor="#53624f"
+                                  changeRating={(newRating) =>
+                                    setRating(newRating)
+                                  }
+                                  numberOfStars={5}
+                                  starDimension="30px"
+                                  starSpacing="5px"
+                                  name="rating"
+                                />
+                              </div>
+
+                              {/* Comment */}
+                              <div className="mb-3">
+                                
+                                <textarea
+                                  className="textarea text-accent textarea-bordered w-full"
+                                  rows={3}
+                                  name="comment"
+                                  required
+                                  placeholder="Write your review..."
+                                  value={comment}
+                                  onChange={(e) => setComment(e.target.value)}
+                                ></textarea>
+                              </div>
+                                  <button className="w-full">
+                                    <NavBerButton level='Submit Review'></NavBerButton>
+                                  </button>
+                             
+                            </form>
+                          </div>
+                        </dialog>
+
+                    {/* update modal */}
+                    <dialog id={`my_modal_${data._id}`} className="modal">
+                          <div className="modal-box bg-accent-content">
+                            <form method="dialog">
+                              {/* if there is a button in form, it will close the modal */}
+                              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                ✕
+                              </button>
+                            </form>
+                            <h3 className="font-bold text-lg text-center mb-6">
+                              Update Date
+                            </h3>
+                            <input
+                              onChange={(e) => setDate(e.target.value)}
+                              type="date"
+                              required
+                              className="input text-accent w-full border"
+                            />
+                            <p className="text-red-500 font-bold mt-2">
+                              {dateErr && "Please select date"}
+                            </p>
+                            <div className="flex justify-center mt-6">
+                              <NavBerButton
+                                onClick={() => handleUpdateDate(data._id)}
+                                level="Update Date"
+                              ></NavBerButton>
+                            </div>
+                          </div>
+                        </dialog>
+                  </div>
+
                 </td>
               </tr>
             ))}

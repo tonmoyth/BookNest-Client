@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import NavBerButton from "../../Components/SliderButton/NavBerButton";
 
 const SignIn = () => {
   const [passShow, setPassShow] = useState(false);
@@ -54,12 +55,12 @@ const SignIn = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-65px)] bg-secondary flex justify-center items-center">
-      <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800">
-        <h1 className="text-2xl font-bold text-center">Login</h1>
+    <div className="min-h-[calc(100vh-65px)] bg-accent flex justify-center items-center">
+      <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-accent-content">
+        <h1 className="text-2xl font-bold text-center text-primary">Sign In</h1>
         <form onSubmit={handleSignInForm} className="space-y-6">
           <div className="space-y-1 text-sm">
-            <label htmlFor="email" className="block dark:text-gray-600">
+            <label htmlFor="email" className="block text-primary">
               Enter Your Email
             </label>
             <input
@@ -71,7 +72,7 @@ const SignIn = () => {
             />
           </div>
           <div className="space-y-1 text-sm relative">
-            <label htmlFor="password" className="block dark:text-gray-600">
+            <label htmlFor="password" className="block text-primary">
               Password
             </label>
             <input
@@ -88,13 +89,15 @@ const SignIn = () => {
               {passShow ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
             </p>
           </div>
-          <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 bg-primary">
-            Sign in
-          </button>
+
+         <button className="w-full">
+           <NavBerButton level='Sign In'></NavBerButton>
+         </button>
+          
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
-          <p className="px-3 text-sm dark:text-gray-600">
+          <p className="px-3 text-sm text-primary">
             Login with social accounts
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
@@ -134,7 +137,7 @@ const SignIn = () => {
             Login with Google
           </button>
         </div>
-        <p className="text-xs text-center sm:px-6 dark:text-gray-600">
+        <p className="text-xs text-center sm:px-6 text-primary">
           Don't have an account?
           <Link
             to="/signup"

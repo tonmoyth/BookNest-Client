@@ -1,17 +1,18 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { FaFacebook, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import logo from '../../assets/logo.png'
 
 const Footer = () => {
+  const {pathname} = useLocation()
   return (
-    <footer className="footer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:footer-horizontal bg-accent text-white  p-10">
+    <footer className={`footer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:footer-horizontal ${pathname === '/' ? 'bg-accent' : 'bg-accent-content'} bg-accent text-white  p-10`}>
       <aside>
         <div>
-          <h1 className="text-2xl md:text-3xl flex items-center gap-1">
+          <Link to='/' className="text-2xl md:text-3xl flex items-center gap-1">
             <img src={logo} alt="" />
             Book <span className="text-primary font-bold">Nest</span>
-          </h1>
+          </Link>
         </div>
         <p className="text-primary-content">
           Conveniently fashion market positioning readiness before sticky

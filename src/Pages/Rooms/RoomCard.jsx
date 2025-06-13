@@ -5,7 +5,7 @@ const RoomCard = ({ room }) => {
     const navigate = useNavigate();
   const {_id, image,roomType,description,pricePerNight,roomSize,view ,rating,reviews} = room;
   return (
-    <div onClick={()=> navigate(`/room/${_id}`)} className="flex flex-col md:h-58 hover:scale-105 hover:shadow-xl overflow-hidden transition duration-300 transform md:flex-row bg-secondary rounded-xl shadow-md  mb-6">
+    <div onClick={()=> navigate(`/room/${_id}`)} className="flex cursor-pointer flex-col md:h-58 hover:scale-105 hover:shadow-xl overflow-hidden transition duration-300 transform md:flex-row bg-secondary rounded-xl shadow-md  mb-6">
       {/* Room Image */}
       <div className="md:w-1/2 ">
         <img src={image} alt={roomType} className="h-[200px] md:h-full  w-full object-cover" />

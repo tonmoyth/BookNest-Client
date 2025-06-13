@@ -5,6 +5,7 @@ import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import { auth } from "../../Firebase/firebase.cofig";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import NavBerButton from "../../Components/SliderButton/NavBerButton";
 
 const SignUp = () => {
   const [passShow, setPassShow] = useState(false);
@@ -94,13 +95,13 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-65px)] bg-secondary flex justify-center items-center">
-      <div className="w-full my-10 max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800">
+    <div className="min-h-[calc(100vh-65px)] bg-accent flex justify-center items-center">
+      <div className="w-full my-10 max-w-md p-8 space-y-3 rounded-xl text-primary bg-accent-content">
         <h1 className="text-2xl font-bold text-center">Sign Up</h1>
         <form onSubmit={handleSignUpForm} className="space-y-6">
           {/* name input */}
           <div className="space-y-1 text-sm">
-            <label htmlFor="name" className="block dark:text-gray-600">
+            <label htmlFor="name" className="block ">
               Enter Your Name
             </label>
             <input
@@ -114,7 +115,7 @@ const SignUp = () => {
           </div>
           {/* email input */}
           <div className="space-y-1 text-sm">
-            <label htmlFor="name" className="block dark:text-gray-600">
+            <label htmlFor="name" className="block ">
               Enter Your Email
             </label>
             <input
@@ -128,7 +129,7 @@ const SignUp = () => {
           </div>
           {/* photo url */}
           <div className="space-y-1 text-sm">
-            <label htmlFor="name" className="block dark:text-gray-600">
+            <label htmlFor="name" className="block ">
               Photo URL
             </label>
             <input
@@ -142,7 +143,7 @@ const SignUp = () => {
           </div>
           {/* password */}
           <div className="space-y-1 text-sm relative">
-            <label htmlFor="password" className="block dark:text-gray-600">
+            <label htmlFor="password" className="block ">
               Password
             </label>
             <input
@@ -155,18 +156,19 @@ const SignUp = () => {
             />
             <p
               onClick={() => setPassShow((prev) => !prev)}
-              className="absolute top-9 right-4"
+              className="absolute text-accent top-9 right-4"
             >
               {passShow ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
             </p>
           </div>
-          <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 bg-primary">
-            Sign Up
+          <button className="w-full">
+            <NavBerButton level='Sign Up'></NavBerButton>
           </button>
+          
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
-          <p className="px-3 text-sm dark:text-gray-600">
+          <p className="px-3 text-sm ">
             Login with social accounts
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
@@ -206,7 +208,7 @@ const SignUp = () => {
             Login with Google
           </button>
         </div>
-        <p className="text-xs text-center sm:px-6 dark:text-gray-600">
+        <p className="text-xs text-center sm:px-6 ">
           Don't have an account?
           <Link
             to="/signin"
