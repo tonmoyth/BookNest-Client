@@ -5,6 +5,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import Rooms from "../Rooms/Rooms";
+import { Helmet } from "react-helmet-async";
 
 const RoomDetails = () => {
   const { data: room } = useLoaderData();
@@ -77,6 +78,9 @@ const RoomDetails = () => {
   };
   return (
     <div className="bg-accent text-primary">
+      <Helmet>
+        <title>Details</title>
+      </Helmet>
       <div className="max-w-5xl mx-auto p-4 space-y-6">
         {/* Room Image */}
         <img
@@ -131,8 +135,8 @@ const RoomDetails = () => {
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {room.reviews.length > 0 ? (
-              reviews.map((rev) => (
-                <div className="container mb-4 flex flex-col w-full max-w-lg p-2 mx-auto divide-y rounded-md bg-accent-content">
+              reviews.map((rev,index) => (
+                <div key={index} className="container mb-4 flex flex-col w-full max-w-lg p-2 mx-auto divide-y rounded-md bg-accent-content">
                   <div className="flex justify-between p-2">
                     <div className="flex space-x-4">
                       <div>

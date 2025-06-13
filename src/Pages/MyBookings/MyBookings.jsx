@@ -8,6 +8,7 @@ import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import moment from "moment/moment";
 import AxiosInterceptor from "../../Hooks/AxiosInterceptor/AxiosInterceptor";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { Helmet } from "react-helmet-async";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
@@ -162,7 +163,9 @@ const MyBookings = () => {
   };
   return (
     <div className="min-h-[calc(100vh-65px)] bg-accent text-primary">
-      
+      <Helmet>
+        <title>My booking</title>
+      </Helmet>
 
       <div className="overflow-x-auto w-11/12 mx-auto py-6">
         <table className="table ">

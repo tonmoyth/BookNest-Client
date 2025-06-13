@@ -5,6 +5,8 @@ import OurHotel from "./OurHotel/OurHotel";
 import Service from "./Service/Service";
 import ReviewTestimonial from "./ReviewTestimonial/ReviewTestimonial";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+
 
 const Home = () => {
   useEffect(() => {
@@ -12,6 +14,9 @@ const Home = () => {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Banner></Banner>
       {/* <Map></Map> */}
       <OurHotel></OurHotel>

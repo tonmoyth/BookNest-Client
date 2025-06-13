@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router";
 import RoomCard from "./RoomCard";
 import { useEffect, useState } from "react";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
+import { Helmet } from "react-helmet-async";
 
 const Rooms = () => {
   const { data } = useLoaderData();
@@ -25,7 +26,9 @@ const Rooms = () => {
   return (
     <div className="min-h-[calc(100vh-65px)] bg-accent py-6">
       
-
+    <Helmet>
+      <title>Rooms</title>
+    </Helmet>
       {/* range form */}
       <div>
         <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-accent-content">
@@ -51,9 +54,9 @@ const Rooms = () => {
                 className="w-full border px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
               />
             </div>
-            <button className="w-full">
+            <div className="w-full flex justify-center">
               <NavBerButton level='Apply Now'></NavBerButton>
-            </button>
+            </div>
             
           </form>
         </div>

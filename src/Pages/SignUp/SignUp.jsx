@@ -6,15 +6,18 @@ import { auth } from "../../Firebase/firebase.cofig";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const [passShow, setPassShow] = useState(false);
   const { userCreateEmailAndPass, setUser, userSignUpGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
+   const [loader, setLoader] = useState(false);
 
   // handle form
   const handleSignUpForm = (e) => {
+    setLoader(true);
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
@@ -52,6 +55,7 @@ const SignUp = () => {
           updateProfile(auth.currentUser, updateDoc)
             .then(() => {
               setUser(updated);
+              setLoader(false);
               navigate('/')
               Swal.fire({
                 position: "center",
@@ -161,12 +165,23 @@ const SignUp = () => {
               {passShow ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
             </p>
           </div>
-          <button className="w-full">
-            <NavBerButton level='Sign Up'></NavBerButton>
-          </button>
+          <div className="w-full flex justify-center">
+            <NavBerButton
+              level={
+                loader ? (
+                  <span className="loading loading-spinner loading-md"></span>
+                ) : (
+                  "Sign Up"
+                )
+              }
+            ></NavBerButton>
+          </div>
           
         </form>
         <div className="flex items-center pt-4 space-x-1">
+          <Helmet>
+            <title>Sign Up</title>
+          </Helmet>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
           <p className="px-3 text-sm ">
             Login with social accounts

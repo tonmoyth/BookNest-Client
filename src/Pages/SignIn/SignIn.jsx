@@ -4,16 +4,18 @@ import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
+import { Helmet } from "react-helmet-async";
 
 const SignIn = () => {
   const [passShow, setPassShow] = useState(false);
   const { userSignIn, userSignUpGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
-  const {state} = useLocation();
- 
+  const { state } = useLocation();
+  const [loader, setLoader] = useState(false);
 
   // handle Form
   const handleSignInForm = (e) => {
+    setLoader(true);
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
@@ -21,7 +23,8 @@ const SignIn = () => {
 
     userSignIn(email, password)
       .then(() => {
-        navigate(state || '/');
+        setLoader(false);
+        navigate(state || "/");
         Swal.fire({
           position: "center",
           icon: "success",
@@ -43,7 +46,7 @@ const SignIn = () => {
   const handleGoogleButton = () => {
     userSignUpGoogle()
       .then(() => {
-       navigate(state || '/');
+        navigate(state || "/");
       })
       .catch((err) => {
         Swal.fire({
@@ -56,6 +59,9 @@ const SignIn = () => {
 
   return (
     <div className="min-h-[calc(100vh-65px)] bg-accent flex justify-center items-center">
+      <Helmet>
+        <title>Sign In</title>
+      </Helmet>
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-accent-content">
         <h1 className="text-2xl font-bold text-center text-primary">Sign In</h1>
         <form onSubmit={handleSignInForm} className="space-y-6">
@@ -90,9 +96,17 @@ const SignIn = () => {
             </p>
           </div>
 
-         <button className="w-full">
-           <NavBerButton level='Sign In'></NavBerButton>
-         </button>
+          <div className="w-full flex justify-center">
+            <NavBerButton
+              level={
+                loader ? (
+                  <span className="loading loading-spinner loading-md"></span>
+                ) : (
+                  "Sign In"
+                )
+              }
+            ></NavBerButton>
+          </div>
           
         </form>
         <div className="flex items-center pt-4 space-x-1">
