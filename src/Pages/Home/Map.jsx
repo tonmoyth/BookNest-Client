@@ -4,7 +4,9 @@ import 'leaflet/dist/leaflet.css';
 const Map = () => {
     const position = [23.8103, 90.4125];
   return (
-     <div>
+     <div className='bg-accent'>
+      <h1 className='text-2xl lg:text-4xl text-center font-semibold text-primary mb-4'>Hotel Location</h1>
+      <div className='w-11/12 mx-auto'>
        
         <MapContainer center={position} zoom={13} style={{ height: '500px', width: '100%' }}>
       <TileLayer
@@ -17,6 +19,7 @@ const Map = () => {
         </Popup>
       </Marker>
     </MapContainer>
+     </div>
      </div>
   );
 };

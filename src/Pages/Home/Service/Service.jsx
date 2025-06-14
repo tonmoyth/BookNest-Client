@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 
 const Service = () => {
   return (
-    <section className="bg-accent text-primary  px-4 md:px-20">
+    <section className="bg-accent text-primary py-8  px-4 md:px-20">
       <div className="grid md:grid-cols-2 gap-10 items-start">
         {/* Left Side */}
         <motion.div

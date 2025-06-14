@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { motion } from "motion/react"
 
 const FeaturedRoomCard = ({room}) => {
-    const {_id,image,roomType,rating,description} = room
+    const {_id,image,roomType,rating,description,pricePerNight} = room
     return (
         <motion.div
         initial={{y: 80}}
@@ -23,7 +23,10 @@ const FeaturedRoomCard = ({room}) => {
 
       <div className="card-body bg-accent-content text-primary">
 
-        <h2 className="card-title text-lg font-bold">{roomType}</h2>
+        <div className='flex justify-between'>
+          <h2 className="card-title text-lg font-bold">{roomType}</h2>
+          <span className='border px-2 py-1'>{pricePerNight}/Per Night</span>
+        </div>
 
         <p className="text-sm text-primary-content">
           {description.length > 100 ? description.slice(0, 100) + '...' : description}

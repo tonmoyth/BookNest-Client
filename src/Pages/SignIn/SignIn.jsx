@@ -35,6 +35,7 @@ const SignIn = () => {
         });
       })
       .catch((err) => {
+        setLoader(false);
         Swal.fire({
           icon: "error",
           title: "Oops...",

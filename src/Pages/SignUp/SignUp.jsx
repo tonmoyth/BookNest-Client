@@ -26,6 +26,7 @@ const SignUp = () => {
     const updateDoc = { displayName: newUser.name, photoURL: newUser.photo };
 
     if (!/[A-Z]/.test(newUser.password)) {
+      setLoader(false);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -34,6 +35,7 @@ const SignUp = () => {
 
       return;
     } else if (!/[a-z]/.test(newUser.password)) {
+      setLoader(false);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -42,6 +44,7 @@ const SignUp = () => {
 
       return;
     } else if (newUser.password.length < 6) {
+      setLoader(false);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -67,6 +70,7 @@ const SignUp = () => {
               });
             })
             .catch((err) => {
+              setLoader(false);
               Swal.fire({
                 icon: "error",
                 title: "Oops...",

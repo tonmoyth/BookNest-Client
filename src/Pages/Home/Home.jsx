@@ -19,9 +19,10 @@ const Home = () => {
         <meta name="description" content="booking rooms"></meta>
       </Helmet>
       <Banner></Banner>
-      {/* <Map></Map> */}
+      
       <OurHotel></OurHotel>
       <FeaturedRooms></FeaturedRooms>
+      <Map></Map>
       <Service></Service>
       <ReviewTestimonial></ReviewTestimonial>
 
