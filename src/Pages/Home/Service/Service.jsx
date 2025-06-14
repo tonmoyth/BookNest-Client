@@ -1,12 +1,18 @@
 import React from "react";
 import { FaPhoneAlt, FaPlane, FaWifi, FaDumbbell, FaBed } from "react-icons/fa";
+import { motion } from "motion/react";
 
 const Service = () => {
   return (
     <section className="bg-accent text-primary  px-4 md:px-20">
       <div className="grid md:grid-cols-2 gap-10 items-start">
         {/* Left Side */}
-        <div>
+        <motion.div
+          initial={{ x: -80 }}
+          whileInView={{ x: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.0 }}
+        >
           <p className="text-primary tracking-widest mb-2">➜ SERVICE</p>
           <h2 className="text-4xl text-primary md:text-5xl font-bold leading-tight mb-6">
             Enhancing Your’s <br />
@@ -24,46 +30,70 @@ const Service = () => {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Side */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-hidden">
           {/* Transportations */}
-          <div className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl ">
+          <motion.div
+            initial={{ x: 80 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true, amount: 0.0 }}
+            className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl "
+          >
             <div className="text-primary text-3xl mb-4">{<FaPlane />}</div>
             <h3 className="text-xl font-semibold mb-2">Transportations</h3>
             <p className="text-primary-content text-sm">
               Reliable airport and local transport services at your convenience
             </p>
-          </div>
+          </motion.div>
 
           {/* Wi-Fi and Internet */}
-          <div className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl">
+          <motion.div
+            initial={{ x: 80 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true, amount: 0.0 }}
+            className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl"
+          >
             <div className="text-primary text-3xl mb-4">{<FaWifi />}</div>
             <h3 className="text-xl font-semibold mb-2">Wi-Fi and Internet</h3>
             <p className="text-primary-content text-sm">
               Fast and secure internet access throughout your stay.
             </p>
-          </div>
+          </motion.div>
 
           {/* Gym Facilities */}
 
-          <div className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl">
+          <motion.div
+            initial={{ x: 80 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true, amount: 0.0 }}
+            className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl"
+          >
             <div className="text-primary text-3xl mb-4">{<FaDumbbell />}</div>
             <h3 className="text-xl font-semibold mb-2">Gym Facilities</h3>
             <p className="text-primary-content text-sm">
               Modern gym equipment for your fitness routine.
             </p>
-          </div>
+          </motion.div>
 
           {/* Room Services */}
-          <div className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl">
+          <motion.div
+            initial={{ x: 80 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true, amount: 0.0 }}
+            className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl"
+          >
             <div className="text-primary text-3xl mb-4">{<FaBed />}</div>
             <h3 className="text-xl font-semibold mb-2">Room Services</h3>
             <p className="text-primary-content text-sm">
               Comfort delivered to your room.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

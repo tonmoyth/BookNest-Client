@@ -80,6 +80,7 @@ const RoomDetails = () => {
     <div className="bg-accent text-primary">
       <Helmet>
         <title>Details</title>
+        <meta name="description" content="best rooms"></meta>
       </Helmet>
       <div className="max-w-5xl mx-auto p-4 space-y-6">
         {/* Room Image */}

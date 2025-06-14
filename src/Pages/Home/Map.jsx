@@ -4,8 +4,8 @@ import 'leaflet/dist/leaflet.css';
 const Map = () => {
     const position = [23.8103, 90.4125];
   return (
-     <div className='my-6'>
-        <h1 className='text-4xl text-center text-accent mb-4 font-bold'>Hotel <span className='text-primary'>Location</span></h1>
+     <div>
+       
         <MapContainer center={position} zoom={13} style={{ height: '500px', width: '100%' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

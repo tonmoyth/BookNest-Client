@@ -11,24 +11,34 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import axios from "axios";
 import StarRatings from "react-star-ratings";
+ import { motion } from "motion/react"
 
 const ReviewTestimonial = () => {
   const [reviews, setReviews] = useState([]);
+  console.log(reviews)
+ 
 
   useEffect(() => {
     axios(`${import.meta.env.VITE_SERVER_URL}/all_reviews`).then((res) => {
       setReviews(res.data);
+      console.log(res.data)
     });
   }, []);
 
   return (
     <div className="bg-accent py-6">
-      <div className="w-11/12 mx-auto py-6">
+      <motion.div
+        initial={{ y: 80 }}
+        whileInView={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true, amount: 0.0 }}
+        className="w-11/12 mx-auto py-6"
+      >
         <p className="text-primary font-bold">➜ Testimonals</p>
         <h1 className="text-primary text-3xl font-semibold">
           What Say Our Customers <br /> About Services
         </h1>
-      </div>
+      </motion.div>
 
       <Swiper
         breakpoints={{
@@ -68,7 +78,9 @@ const ReviewTestimonial = () => {
               </div>
               {/* comment */}
               <div className="my-8">
-                <p className="text-left font-normal text-sm text-primary-content">{rev.comment}</p>
+                <p className="text-left font-normal text-sm text-primary-content">
+                  {rev.comment}
+                </p>
               </div>
 
               {/* user */}
@@ -76,14 +88,13 @@ const ReviewTestimonial = () => {
               <div className="flex space-x-4 items-center ">
                 <div className="w-12 h-12">
                   <img
-                    src='https://i.ibb.co/s9W1ndHW/support.png'
+                    src="https://i.ibb.co/s9W1ndHW/support.png"
                     alt=""
                     className="object-cover w-12 h-12 rounded-full"
                   />
                 </div>
                 <div>
                   <h4 className="font-bold">{rev.user}</h4>
-                  
                 </div>
               </div>
             </div>

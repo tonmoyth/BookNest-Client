@@ -1,11 +1,17 @@
 import React from 'react';
 import NavBerButton from '../../../Components/SliderButton/NavBerButton';
 import { Link } from 'react-router';
+import { motion } from "motion/react"
 
 const FeaturedRoomCard = ({room}) => {
     const {_id,image,roomType,rating,description} = room
     return (
-        <div className="card bg-base-100 shadow-xl rounded-xl my-6 overflow-hidden">
+        <motion.div
+        initial={{y: 80}}
+        whileInView={{y: 0}}
+        transition={{duration: 0.5}}
+        viewport={{ once: true, amount: 0.0 }}
+        className="card bg-base-100 shadow-xl rounded-xl my-6 overflow-hidden">
       <figure className="relative">
         <img src={image} alt="Dining Spot" className="h-56 w-full object-cover hover:scale-105 overflow-hidden transition duration-300 transform" />
         
@@ -29,7 +35,7 @@ const FeaturedRoomCard = ({room}) => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
     );
 };
 

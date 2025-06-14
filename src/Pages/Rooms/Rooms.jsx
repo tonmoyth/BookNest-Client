@@ -3,6 +3,7 @@ import RoomCard from "./RoomCard";
 import { useEffect, useState } from "react";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import { Helmet } from "react-helmet-async";
+ import { motion } from "motion/react"
 
 const Rooms = () => {
   const { data } = useLoaderData();
@@ -25,14 +26,22 @@ const Rooms = () => {
 
   return (
     <div className="min-h-[calc(100vh-65px)] bg-accent py-6">
-      
-    <Helmet>
-      <title>Rooms</title>
-    </Helmet>
+      <Helmet>
+        <title>Rooms</title>
+        <meta name="keyword" content="booking, rooms, room"></meta>
+      </Helmet>
       {/* range form */}
       <div>
-        <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-accent-content">
-          <h1 className="text-3xl font-semibold text-center text-primary">Price range</h1>
+        <motion.div
+          initial={{ y: 80 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.0 }}
+          className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-accent-content"
+        >
+          <h1 className="text-3xl font-semibold text-center text-primary">
+            Price range
+          </h1>
           <form onSubmit={handlePriceRangeForm} className="space-y-6">
             <div className="space-y-1 text-sm">
               <input
@@ -55,11 +64,10 @@ const Rooms = () => {
               />
             </div>
             <div className="w-full flex justify-center">
-              <NavBerButton level='Apply Now'></NavBerButton>
+              <NavBerButton level="Apply Now"></NavBerButton>
             </div>
-            
           </form>
-        </div>
+        </motion.div>
       </div>
       <h1 className="text-4xl text-accent text-center font-bold">All rooms</h1>
       <div className="w-10/12 mx-auto space-y-10 my-6">

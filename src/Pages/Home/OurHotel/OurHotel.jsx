@@ -4,17 +4,28 @@ import SliderButton from "../../../Components/SliderButton/SliderButton";
 import { IoStarOutline } from "react-icons/io5";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { motion } from "motion/react"
+
 
 const OurHotel = () => {
-  const { ref, inView} = useInView({
+  const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
   });
   return (
-    <section className="bg-accent text-primary py-16 px-6 md:px-16">
+    <motion.section
+
+      className="bg-accent text-primary py-16  px-6 md:px-16"
+    >
       <div className="grid md:grid-cols-2 gap-10 items-center">
         {/* Left Content */}
-        <div>
+        <motion.div 
+        initial={{y: 80}}
+        whileInView={{y: 0}}
+        transition={{duration: 0.5}}
+        viewport={{ once: true, amount: 0.0 }}
+        >
+          
           <p className="uppercase text-sm text-primary font-semibold flex gap-2 tracking-widest mb-3">
             <FaArrowRight />
             Our Hotel
@@ -37,10 +48,15 @@ const OurHotel = () => {
           </div>
 
           <SliderButton level="MORE ABOUT"></SliderButton>
-        </div>
+        </motion.div>
 
         {/* Right Content */}
-        <div className="relative">
+        <motion.div
+        initial={{y: 80}}
+        whileInView={{y: 0}}
+        transition={{duration: 0.5}}
+        viewport={{ once: true, amount: 0.0 }}
+        className="relative">
           <img
             src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"
             alt="Hotel Chairs"
@@ -53,18 +69,16 @@ const OurHotel = () => {
                 <IoStarOutline size={30} />
               </div>
               <div>
-                
                 <h3 ref={ref} className="text-white text-2xl font-bold">
                   {inView && <CountUp end={6000} />}
-                  
                 </h3>
                 <p className="text-primary-content text-sm">Happy Customers</p>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

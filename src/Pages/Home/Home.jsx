@@ -9,13 +9,14 @@ import { Helmet } from "react-helmet-async";
 
 
 const Home = () => {
-  useEffect(() => {
-    document.getElementById("my_modal_3").showModal();
-  }, []);
+  // useEffect(() => {
+  //   document.getElementById("my_modal_3").showModal();
+  // }, []);
   return (
     <div>
       <Helmet>
         <title>Home</title>
+        <meta name="description" content="booking rooms"></meta>
       </Helmet>
       <Banner></Banner>
       {/* <Map></Map> */}

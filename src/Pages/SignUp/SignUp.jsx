@@ -1,19 +1,20 @@
 import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link,  useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import { auth } from "../../Firebase/firebase.cofig";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import { Helmet } from "react-helmet-async";
+ import { motion } from "motion/react"
 
 const SignUp = () => {
   const [passShow, setPassShow] = useState(false);
   const { userCreateEmailAndPass, setUser, userSignUpGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
-   const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   // handle form
   const handleSignUpForm = (e) => {
@@ -56,7 +57,7 @@ const SignUp = () => {
             .then(() => {
               setUser(updated);
               setLoader(false);
-              navigate('/')
+              navigate("/");
               Swal.fire({
                 position: "center",
                 icon: "success",
@@ -87,7 +88,7 @@ const SignUp = () => {
   const handleGoogleButton = () => {
     userSignUpGoogle()
       .then(() => {
-        navigate('/')
+        navigate("/");
       })
       .catch((err) => {
         Swal.fire({
@@ -100,7 +101,13 @@ const SignUp = () => {
 
   return (
     <div className="min-h-[calc(100vh-65px)] bg-accent flex justify-center items-center">
-      <div className="w-full my-10 max-w-md p-8 space-y-3 rounded-xl text-primary bg-accent-content">
+      <motion.div
+        initial={{ y: 80 }}
+        whileInView={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true, amount: 0.0 }}
+        className=" my-10 max-w-md p-8 space-y-3 rounded-xl text-primary w-11/12 mx-auto bg-accent-content"
+      >
         <h1 className="text-2xl font-bold text-center">Sign Up</h1>
         <form onSubmit={handleSignUpForm} className="space-y-6">
           {/* name input */}
@@ -176,16 +183,13 @@ const SignUp = () => {
               }
             ></NavBerButton>
           </div>
-          
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <Helmet>
             <title>Sign Up</title>
           </Helmet>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
-          <p className="px-3 text-sm ">
-            Login with social accounts
-          </p>
+          <p className="px-3 text-sm ">Login with social accounts</p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
         </div>
         <div className="flex justify-center space-x-4">
@@ -234,7 +238,7 @@ const SignUp = () => {
             Sign in
           </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -36,12 +36,15 @@ const Header = () => {
             });
           })
           .catch((err) => {
-            console.log(err);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: `${err.message}`,
+            });
           });
       }
     });
   };
-
 
   const links = (
     <>
@@ -73,7 +76,11 @@ const Header = () => {
   );
   return (
     <div>
-      <div className={`navbar px-8 z-10 text-primary relative ${pathname === '/' ? '' : 'bg-accent-content text-primary'}`}>
+      <div
+        className={`navbar px-8 z-10 text-primary relative ${
+          pathname === "/" ? "" : "bg-accent-content text-primary"
+        }`}
+      >
         <div className="navbar-start">
           <Link className="text-2xl">
             <div className="flex gap-1 items-center">
@@ -219,12 +226,14 @@ const Header = () => {
                   ) : (
                     <li>
                       <Link
-                      to='/signin'
+                        to="/signin"
                         rel="noopener noreferrer"
                         href="#"
                         className="flex items-center p-2 space-x-3 rounded-md"
                       >
-                        <span><LuLogIn size={22}/></span>
+                        <span>
+                          <LuLogIn size={22} />
+                        </span>
                         <span>Sign In</span>
                       </Link>
                     </li>

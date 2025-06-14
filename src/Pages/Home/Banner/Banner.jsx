@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import receptionImage from "../../../assets/reception.jpg";
 import receptionImage2 from "../../../assets/reception2.jpg";
 import female from "../../../assets/female.jpg";
+import { motion } from "motion/react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -24,7 +25,7 @@ const Banner = () => {
   // const links = (
   //   <>
   //     <li>
-  //       <NavLink 
+  //       <NavLink
   //       className={({isActive})=> isActive && 'border-b-2 border-primary'}
   //       to="/">Home</NavLink>
   //     </li>
@@ -62,15 +63,37 @@ const Banner = () => {
         >
           <div className="absolute h-full w-full bg-black opacity-55"></div>
           <div className="z-10 w-4/5 mx-auto space-y-2">
-            <h1 className=" font-bold md:text-2xl lg:text-4xl mx-auto md:font-semibold lg:font-bold">
-            Discover and Book the Perfect Hotel for Every Journey, Anywhere <br /> in 
-            the World.
-          </h1>
-          <p className="z-10 text-[12px] md:text-[18px]">
-            Easily find the ideal stay with real-time availability, personalized
-            options,<br /> and global coverage — all in one place
-          </p>
-          <SliderButton level='See Rooms'></SliderButton>
+            <motion.h1
+              initial={{ y: 80 }}
+              whileInView={{ y: 0 }}
+              transition={{ duration: 2 }}
+              viewport={{ once: true, amount: 0.0 }}
+              className=" font-bold md:text-2xl lg:text-4xl mx-auto md:font-semibold lg:font-bold"
+            >
+              Discover and Book the Perfect Hotel for Every Journey, Anywhere{" "}
+              <br /> in the World.
+            </motion.h1>
+            <motion.p
+              initial={{ y: 80 }}
+              whileInView={{ y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, amount: 0.0 }}
+              className="z-10 text-[12px] md:text-[18px]"
+            >
+              Easily find the ideal stay with real-time availability,
+              personalized options,
+              <br /> and global coverage — all in one place
+            </motion.p>
+            <motion.div
+            initial={{ y: 80 }}
+            whileInView={{ y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, amount: 0.0 }}
+            >
+              <Link to='/rooms'>
+              <SliderButton level="See Rooms"></SliderButton>
+              </Link>
+            </motion.div>
           </div>
         </SwiperSlide>
         <SwiperSlide
@@ -84,14 +107,14 @@ const Banner = () => {
           <div className="absolute h-full w-full bg-black opacity-55"></div>
           <div className="z-10 w-4/5 mx-auto space-y-2">
             <h1 className="font-bold md:text-2xl lg:text-4xl mx-auto md:font-semibold lg:font-bold">
-            Seamless Hotel Booking with the Comfort, Convenience, and <br /> Confidence
-            You Deserve.
-          </h1>
-          <p className="z-10 text-[12px] md:text-[18px]">
-            From luxury escapes to budget stays, book with ease and trust —
-            backed by  verified reviews <br /> and 24/7 support.
-          </p>
-          <SliderButton level='See Rooms'></SliderButton>
+              Seamless Hotel Booking with the Comfort, Convenience, and <br />{" "}
+              Confidence You Deserve.
+            </h1>
+            <p className="z-10 text-[12px] md:text-[18px]">
+              From luxury escapes to budget stays, book with ease and trust —
+              backed by verified reviews <br /> and 24/7 support.
+            </p>
+            <SliderButton level="See Rooms"></SliderButton>
           </div>
         </SwiperSlide>
         <SwiperSlide
@@ -105,14 +128,15 @@ const Banner = () => {
           <div className="absolute h-full w-full bg-black opacity-55"></div>
           <div className="z-10 w-4/5 mx-auto space-y-2">
             <h1 className="font-bold md:text-2xl lg:text-4xl mx-auto md:font-semibold lg:font-bold">
-            Transform the Way You Travel with Smart Hotel Deals, Real Reviews,<br />
-            and Instant Booking.
-          </h1>
-          <p className="z-10 text-[12px] md:text-[18px]">
-            Experience hassle-free booking, exclusive deals, and trusted hotels
-            —  all tailored <br /> to your travel needs.
-          </p>
-          <SliderButton level='See Rooms'></SliderButton>
+              Transform the Way You Travel with Smart Hotel Deals, Real Reviews,
+              <br />
+              and Instant Booking.
+            </h1>
+            <p className="z-10 text-[12px] md:text-[18px]">
+              Experience hassle-free booking, exclusive deals, and trusted
+              hotels — all tailored <br /> to your travel needs.
+            </p>
+            <SliderButton level="See Rooms"></SliderButton>
           </div>
         </SwiperSlide>
       </Swiper>

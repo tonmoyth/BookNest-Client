@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import { Helmet } from "react-helmet-async";
+ import { motion } from "motion/react"
 
 const SignIn = () => {
   const [passShow, setPassShow] = useState(false);
@@ -62,7 +63,13 @@ const SignIn = () => {
       <Helmet>
         <title>Sign In</title>
       </Helmet>
-      <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-accent-content">
+      <motion.div
+        initial={{ y: 80 }}
+        whileInView={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true, amount: 0.0 }}
+        className="w-11/12 mx-auto max-w-md p-8 space-y-3 rounded-xl bg-accent-content"
+      >
         <h1 className="text-2xl font-bold text-center text-primary">Sign In</h1>
         <form onSubmit={handleSignInForm} className="space-y-6">
           <div className="space-y-1 text-sm">
@@ -107,7 +114,6 @@ const SignIn = () => {
               }
             ></NavBerButton>
           </div>
-          
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
@@ -162,7 +168,7 @@ const SignIn = () => {
             Sign up
           </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };

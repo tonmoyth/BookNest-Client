@@ -7,7 +7,6 @@ import { HelmetProvider } from "react-helmet-async";
 const MainLayout = () => {
   const { pathname } = useLocation();
   const { state } = useNavigation();
-  console.log(state);
 
   return (
     <div>
