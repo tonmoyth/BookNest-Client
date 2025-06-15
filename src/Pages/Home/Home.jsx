@@ -9,9 +9,9 @@ import { Helmet } from "react-helmet-async";
 
 
 const Home = () => {
-  // useEffect(() => {
-  //   document.getElementById("my_modal_3").showModal();
-  // }, []);
+  useEffect(() => {
+    document.getElementById("my_modal_3").showModal();
+  }, []);
   return (
     <div>
       <Helmet>

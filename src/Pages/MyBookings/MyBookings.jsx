@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { ImCancelCircle } from "react-icons/im";
 import StarRatings from "react-star-ratings";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import moment from "moment/moment";
@@ -182,7 +181,7 @@ const MyBookings = () => {
           <thead className="text-primary-content">
             <tr>
               <th>NO</th>
-              <th>Room</th>
+              <th>Name</th>
               <th>Price Per Night</th>
               <th>Date</th>
               <th>Room Size</th>

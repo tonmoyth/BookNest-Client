@@ -64,7 +64,7 @@ const Banner = () => {
           <div className="absolute h-full w-full bg-black opacity-55"></div>
           <div className="z-10 w-4/5 mx-auto space-y-2">
             <motion.h1
-              initial={{ y: 80 }}
+              initial={{ y: -80 }}
               whileInView={{ y: 0 }}
               transition={{ duration: 2 }}
               viewport={{ once: true, amount: 0.0 }}
@@ -73,27 +73,21 @@ const Banner = () => {
               Discover and Book the Perfect Hotel for Every Journey, Anywhere{" "}
               <br /> in the World.
             </motion.h1>
-            <motion.p
-              initial={{ y: 80 }}
-              whileInView={{ y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true, amount: 0.0 }}
+            <p
+             
               className="z-10 text-[12px] md:text-[18px]"
             >
               Easily find the ideal stay with real-time availability,
               personalized options,
               <br /> and global coverage — all in one place
-            </motion.p>
-            <motion.div
-            initial={{ y: 80 }}
-            whileInView={{ y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, amount: 0.0 }}
+            </p>
+            <div
+            
             >
               <Link to='/rooms'>
               <SliderButton level="See Rooms"></SliderButton>
               </Link>
-            </motion.div>
+            </div>
           </div>
         </SwiperSlide>
         <SwiperSlide
