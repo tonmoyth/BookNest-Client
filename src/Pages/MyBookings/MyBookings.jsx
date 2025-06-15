@@ -19,6 +19,8 @@ const MyBookings = () => {
   const [dateErr, setDateErr] = useState(false);
   const instance = AxiosInterceptor();
   const [loader, setLoader] = useState(false);
+  const [reload,setReload] = useState(false);
+ 
 
   useEffect(() => {
     instance(`/booking?email=${user?.email}`)
@@ -32,7 +34,7 @@ const MyBookings = () => {
           text: `${err.message}`,
         });
       });
-  }, [user, instance]);
+  }, [user, instance,reload]);
 
   // cancel button
   const handleCancelButton = (_id, id, date) => {
@@ -145,6 +147,8 @@ const MyBookings = () => {
         })
         .then((res) => {
           if (res.data.acknowledged) {
+            setReload(!reload);
+            
             setLoader(false);
             const modalOff = document.getElementById(`my_modal_${bookedId}`);
             modalOff.close();
@@ -169,6 +173,7 @@ const MyBookings = () => {
         });
     }
   };
+
   return (
     <div className="min-h-[calc(100vh-65px)] bg-accent text-primary">
       <Helmet>

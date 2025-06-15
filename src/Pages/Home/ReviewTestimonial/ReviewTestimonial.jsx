@@ -15,13 +15,13 @@ import StarRatings from "react-star-ratings";
 
 const ReviewTestimonial = () => {
   const [reviews, setReviews] = useState([]);
-  console.log(reviews)
+
  
 
   useEffect(() => {
     axios(`${import.meta.env.VITE_SERVER_URL}/all_reviews`).then((res) => {
       setReviews(res.data);
-      console.log(res.data)
+      
     });
   }, []);
 
