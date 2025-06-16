@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import { Helmet } from "react-helmet-async";
 import { motion } from "motion/react";
+import Loading from "../../Components/Loader/Loading";
 
 const Rooms = () => {
   const { data } = useLoaderData();
@@ -11,9 +12,11 @@ const Rooms = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxprice] = useState(10000);
   const [loader, setLoader] = useState(false);
+  const [initialLoader,setInitialLoader] = useState(true)
 
   useEffect(() => {
     setRooms(data);
+    setInitialLoader(false)
   }, [data]);
 
   // handleRangeForm
@@ -29,6 +32,10 @@ const Rooms = () => {
       setLoader(false);
     }, 2000);
   };
+
+  if(initialLoader){
+    return <Loading></Loading>
+  }
 
   return (
     <div className="min-h-[calc(100vh-65px)] bg-accent py-6">
@@ -85,6 +92,9 @@ const Rooms = () => {
       </div>
       <h1 className="text-4xl text-accent text-center font-bold">All rooms</h1>
       <div className="w-10/12 mx-auto space-y-10 my-6">
+      {
+        
+      }
         {rooms.length > 0 ? (
           rooms.map((room) => <RoomCard key={room._id} room={room}></RoomCard>)
         ) : (
@@ -92,12 +102,13 @@ const Rooms = () => {
             <h2 className="text-2xl font-semibold text-red-500 mb-2">
               😔 No rooms found
             </h2>
-            <p className="text-gray-500">
+            <p className="text-primary-content">
               Sorry! No rooms available in this price range. Try changing the
               filters.
             </p>
           </div>
         )}
+         
       </div>
     </div>
   );
