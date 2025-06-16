@@ -17,9 +17,22 @@ const RoomDetails = () => {
   const [show, setShow] = useState(false);
   const [reviews, setReviews] = useState([]);
 
+  const [confirmButton,setConfirmButton] = useState(null)
+
   useEffect(() => {
     setReviews(room.reviews.slice(0, 3));
   }, [room]);
+
+  useEffect(() => {
+    axios(`${import.meta.env.VITE_SERVER_URL}/checkDate?date=${date}`)
+    .then(res => {
+      if(res.data === true){
+        setConfirmButton(true)
+      }else{
+        setConfirmButton(false)
+      }
+    })
+  },[date])
 
   const handleConfirmButton = () => {
     if (date === "") {
@@ -231,9 +244,9 @@ const RoomDetails = () => {
               className="input w-full border text-accent my-4"
             />
             <div className="text-center">
-              {room.status === "unavailable" || update === true ? (
+              {confirmButton === true || update === true ? (
                 <button className="btn mt-4" disabled="disabled">
-                  Already Booked
+                  Already Booked For This Date
                 </button>
               ) : (
                 <NavBerButton
