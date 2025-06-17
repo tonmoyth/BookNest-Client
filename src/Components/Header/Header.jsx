@@ -9,6 +9,7 @@ import { RxCross2 } from "react-icons/rx";
 import { PiHouseSimpleBold } from "react-icons/pi";
 import { MdOutlineOtherHouses } from "react-icons/md";
 import { LuLogIn } from "react-icons/lu";
+import { TfiGallery } from "react-icons/tfi";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -70,6 +71,14 @@ const Header = () => {
           to="/my_bookings"
         >
           My Bookings
+        </NavLink>
+      </li>
+      <li className="hover:text-primary">
+        <NavLink
+          className={({ isActive }) => isActive && "border-b-2 border-primary"}
+          to="/gallery"
+        >
+          Gallery
         </NavLink>
       </li>
     </>
@@ -182,11 +191,28 @@ const Header = () => {
                       <span>My Booking</span>
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink
+                      to="/gallery"
+                      rel="noopener noreferrer"
+                      href="#"
+                      className={({ isActive }) =>
+                        `flex items-center p-2 space-x-3 rounded-md ${
+                          isActive && "bg-primary text-accent"
+                        }`
+                      }
+                    >
+                      <span>
+                        <TfiGallery size={21}/>
+                      </span>
+                      <span>Gallery</span>
+                    </NavLink>
+                  </li>
                 </ul>
 
                 {/* about  */}
                 <div className="space-y-2 my-2 ml-2">
-                  <h2 className="text-sm font-semibold tracking-widest uppercase dark:text-gray-600">
+                  <h2 className="text-sm font-semibold tracking-widest uppercase ">
                     About Us
                   </h2>
                   <div className="flex flex-col space-y-4">

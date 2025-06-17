@@ -9,6 +9,7 @@ import RoomDetails from "../Pages/RoomDetails/RoomDetails";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../Components/404page/ErrorPage";
+import Gallery from "../Pages/Gallery/Gallery";
 
 export const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path: 'my_bookings',
                 element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+            },
+            {
+                path: 'gallery',
+                Component: Gallery
             },
             {
                 path: 'signin',
