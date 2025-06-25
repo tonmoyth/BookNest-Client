@@ -72,3 +72,16 @@ This project offers a seamless hotel booking experience by combining an intuitiv
 - swiper
 - sweetalert2
 
+## 🛠️ Getting Started (Run Locally)
+
+### 1. Run Locally:
+
+```bash
+1.git clone :
+git clone https://github.com/tonmoyth/BookNest-Client.git
+
+2.Install dependencies:
+npm install
+
+3.Start the development server:
+npm run dev
