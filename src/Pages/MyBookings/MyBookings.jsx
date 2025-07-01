@@ -175,12 +175,12 @@ const MyBookings = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-65px)] bg-accent text-primary">
+    <div className="min-h-screen pt-16 lg:pt-20 bg-accent text-primary">
       <Helmet>
         <title>My booking</title>
       </Helmet>
 
-      <div className="overflow-x-auto w-11/12 mx-auto py-6">
+      <div className="overflow-x-auto w-11/12 mx-auto ">
         <table className="table ">
           {/* head */}
           <thead className="text-primary-content">

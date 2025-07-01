@@ -7,7 +7,7 @@ import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 import NavBerButton from "../../Components/SliderButton/NavBerButton";
 import { Helmet } from "react-helmet-async";
- import { motion } from "motion/react"
+
 
 const SignUp = () => {
   const [passShow, setPassShow] = useState(false);
@@ -104,12 +104,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-65px)] bg-accent flex justify-center items-center">
-      <motion.div
-        initial={{ y: 80 }}
-        whileInView={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true, amount: 0.0 }}
+    <div className="min-h-screen pt-18 bg-accent flex justify-center items-center">
+      <div
+        
         className=" my-10 max-w-md p-8 space-y-3 rounded-xl text-primary w-11/12 mx-auto bg-accent-content"
       >
         <h1 className="text-2xl font-bold text-center">Sign Up</h1>
@@ -242,7 +239,7 @@ const SignUp = () => {
             Sign in
           </Link>
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 };

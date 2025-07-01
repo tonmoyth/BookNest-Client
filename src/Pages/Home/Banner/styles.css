@@ -19,9 +19,9 @@ body {
   padding: 0;
 }
 
-.swiper {
+.mySwiper {
   width: 100%;
-  height: 100%;
+  height: 80vh !important;
   color: white;
 }
 
@@ -44,10 +44,10 @@ body {
 }
 
 .swiper-button-next {
-  color: #ffffff;
+  color: #53624f;
 }
 .swiper-button-prev {
-  color: #ffffff;
+  color: #53624f;
 }
 .swiper-pagination-bullet{
   background-color: #53624f;

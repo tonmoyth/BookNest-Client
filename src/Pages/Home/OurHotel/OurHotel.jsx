@@ -4,7 +4,7 @@ import SliderButton from "../../../Components/SliderButton/SliderButton";
 import { IoStarOutline } from "react-icons/io5";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
-import { motion } from "motion/react"
+
 
 
 const OurHotel = () => {
@@ -13,24 +13,21 @@ const OurHotel = () => {
     threshold: 0,
   });
   return (
-    <motion.section
+    <section
 
-      className="bg-accent text-primary py-16  px-6 md:px-16"
+      className="bg-accent text-primary p-6 lg:p-0 py-10 lg:py-12"
     >
-      <div className="grid md:grid-cols-2 gap-10 items-center">
+      <div className="grid md:grid-cols-2 gap-6 items-center lg:w-11/12 mx-auto">
         {/* Left Content */}
-        <motion.div 
-        initial={{y: 80}}
-        whileInView={{y: 0}}
-        transition={{duration: 0.5}}
-        viewport={{ once: true, amount: 0.0 }}
+        <div 
+      
         >
           
           <p className="uppercase text-sm text-primary font-semibold flex gap-2 tracking-widest mb-3">
             <FaArrowRight />
             Our Hotel
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          <h1 className="text-2xl md:text-4xl font-bold mb-6 leading-tight">
             Your Gateway to Comfort, Luxury, and Unmatched World our Hotel
           </h1>
           <p className="text-primary-content mb-6">
@@ -48,14 +45,10 @@ const OurHotel = () => {
           </div>
 
           <SliderButton level="MORE ABOUT"></SliderButton>
-        </motion.div>
+        </div>
 
         {/* Right Content */}
-        <motion.div
-        initial={{y: 80}}
-        whileInView={{y: 0}}
-        transition={{duration: 0.5}}
-        viewport={{ once: true, amount: 0.0 }}
+        <div
         className="relative">
           <img
             src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"
@@ -76,9 +69,9 @@ const OurHotel = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
- import { motion } from "motion/react"
+
 
 const RoomCard = ({ room }) => {
   const navigate = useNavigate();
@@ -16,13 +16,10 @@ const RoomCard = ({ room }) => {
     reviews,
   } = room;
   return (
-    <motion.div
-      initial={{ y: 80 }}
-      whileInView={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true, amount: 0.0 }}
+    <div
+     
       onClick={() => navigate(`/room/${_id}`)}
-      className="flex cursor-pointer flex-col md:h-58 hover:scale-105 hover:shadow-xl overflow-hidden transition duration-300 transform md:flex-row bg-secondary rounded-xl shadow-md  mb-6"
+      className="flex cursor-pointer flex-col md:h-58 hover:scale-105 hover:shadow-xl overflow-hidden transition duration-300 transform md:flex-row bg-secondary rounded-xl shadow-md  "
     >
       {/* Room Image */}
       <div className="md:w-1/2 ">
@@ -56,7 +53,7 @@ const RoomCard = ({ room }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

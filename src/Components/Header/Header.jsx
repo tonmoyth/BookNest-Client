@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import NavBerButton from "../SliderButton/NavBerButton";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
@@ -15,6 +15,17 @@ const Header = () => {
   const { pathname } = useLocation();
   const { user, userSignOut } = useContext(AuthContext);
   const [show, setShow] = useState(false);
+  const [isScrolled,setIsScrolled] = useState(false);
+
+
+   useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // handleSignOut
   const handleSignOutButton = () => {
@@ -51,7 +62,7 @@ const Header = () => {
     <>
       <li className="hover:text-primary">
         <NavLink
-          className={({ isActive }) => isActive && "border-b-2 border-primary"}
+          className={({ isActive }) => isActive && "border-b-2 border-secondary"}
           to="/"
         >
           Home
@@ -59,7 +70,7 @@ const Header = () => {
       </li>
       <li className="hover:text-primary">
         <NavLink
-          className={({ isActive }) => isActive && "border-b-2  border-primary"}
+          className={({ isActive }) => isActive && "border-b-2  border-secondary"}
           to="/rooms"
         >
           Rooms
@@ -67,7 +78,7 @@ const Header = () => {
       </li>
       <li className="hover:text-primary">
         <NavLink
-          className={({ isActive }) => isActive && "border-b-2 border-primary"}
+          className={({ isActive }) => isActive && "border-b-2 border-secondary"}
           to="/my_bookings"
         >
           My Bookings
@@ -75,7 +86,7 @@ const Header = () => {
       </li>
       <li className="hover:text-primary">
         <NavLink
-          className={({ isActive }) => isActive && "border-b-2 border-primary"}
+          className={({ isActive }) => isActive && "border-b-2 border-secondary"}
           to="/gallery"
         >
           Gallery
@@ -86,12 +97,12 @@ const Header = () => {
   return (
     <div>
       <div
-        className={`navbar px-8 z-10 text-primary relative ${
+        className={`navbar transition-all duration-300 px-8 z-50 text-primary fixed top-0  ${
           pathname === "/" ? "" : "bg-accent-content text-primary"
-        }`}
+        }${isScrolled && 'bg-accent-content text-primary'}`}
       >
         <div className="navbar-start">
-          <Link className="text-2xl">
+          <Link to='/' className="text-2xl">
             <div className="flex gap-1 items-center">
               <img src={logo} alt="" />
               <span className="text-primary">Book</span>
@@ -114,9 +125,9 @@ const Header = () => {
             <div
               className={`${
                 show
-                  ? "absolute transition-all duration-300 ease-in-out top-12 -right-6 bg-secondary"
-                  : "hidden"
-              } text-primary className="h-full p-3 space-y-2 w-60 lg:hidden "`}
+                  ? "translate-x-0"
+                  : "translate-x-full"
+              } fixed top-17 right-0 z-50 h-[vh40] w-60 bg-secondary p-3 space-y-2 text-primary transition-transform duration-300 ease-in-out transform`}
             >
               {user && (
                 <div className="flex items-center p-2 space-x-4">

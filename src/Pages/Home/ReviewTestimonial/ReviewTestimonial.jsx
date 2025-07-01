@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import axios from "axios";
 import StarRatings from "react-star-ratings";
- import { motion } from "motion/react"
+
 
 const ReviewTestimonial = () => {
   const [reviews, setReviews] = useState([]);
@@ -26,19 +26,16 @@ const ReviewTestimonial = () => {
   }, []);
 
   return (
-    <div className="bg-accent py-6">
-      <motion.div
-        initial={{ y: 80 }}
-        whileInView={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true, amount: 0.0 }}
-        className="w-11/12 mx-auto py-6"
+    <div className="bg-accent py-10 lg:py-12">
+      <div
+       
+        className="p-6 lg:w-11/12 mx-auto lg:pl-0"
       >
         <p className="text-primary font-bold">➜ Testimonals</p>
-        <h1 className="text-primary text-3xl font-semibold">
+        <h1 className="text-primary text-2xl md:text-4xl font-semibold">
           What Say Our Customers <br /> About Services
         </h1>
-      </motion.div>
+      </div>
 
       <Swiper
         breakpoints={{
@@ -57,7 +54,7 @@ const ReviewTestimonial = () => {
           clickable: true,
         }}
         modules={[Pagination]}
-        className="mySwiper"
+        className="Swiper"
       >
         {reviews.map((rev, index) => (
           <SwiperSlide key={index} className="!block min-h-[250px]">

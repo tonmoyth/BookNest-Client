@@ -6,7 +6,7 @@ import logo from '../../assets/logo.png'
 const Footer = () => {
   const {pathname} = useLocation()
   return (
-    <footer className={`footer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:footer-horizontal ${pathname === '/' ? 'bg-accent' : 'bg-accent-content'} bg-accent text-white  p-10`}>
+    <footer className={`footer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:footer-horizontal ${pathname === '/' ? 'bg-accent' : 'bg-accent-content'} bg-accent text-white  p-6`}>
       <aside>
         <div>
           <Link to='/' className="text-2xl md:text-3xl flex items-center gap-1">

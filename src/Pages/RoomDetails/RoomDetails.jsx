@@ -90,7 +90,7 @@ const RoomDetails = () => {
     }
   };
   return (
-    <div className="bg-accent text-primary">
+    <div className="bg-accent min-h-screen pt-20 text-primary">
       <Helmet>
         <title>Details</title>
         <meta name="description" content="best rooms"></meta>

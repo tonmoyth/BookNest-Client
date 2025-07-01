@@ -38,7 +38,7 @@ const Banner = () => {
   //   </>
   // );
   return (
-    <div className="relative">
+    <div className="relative ">
       {/* navBer/header */}
       <div className="absolute w-full z-10 top-0 left-0">
         <Header></Header>
@@ -58,21 +58,18 @@ const Banner = () => {
             backgroundImage: `url(${female})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
+           
           }}
-          className="min-h-[100vh] relative "
+          className="h-[70vh] relative"
         >
           <div className="absolute h-full w-full bg-black opacity-55"></div>
           <div className="z-10 w-4/5 mx-auto space-y-2">
-            <motion.h1
-              initial={{ y: -80 }}
-              whileInView={{ y: 0 }}
-              transition={{ duration: 2 }}
-              viewport={{ once: true, amount: 0.0 }}
+            <h1
               className=" font-bold md:text-2xl lg:text-4xl mx-auto md:font-semibold lg:font-bold"
             >
               Discover and Book the Perfect Hotel for Every Journey, Anywhere{" "}
               <br /> in the World.
-            </motion.h1>
+            </h1>
             <p
              
               className="z-10 text-[12px] md:text-[18px]"
@@ -96,7 +93,7 @@ const Banner = () => {
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
-          className="min-h-[100vh] relative "
+          className="h-[70vh] relative "
         >
           <div className="absolute h-full w-full bg-black opacity-55"></div>
           <div className="z-10 w-4/5 mx-auto space-y-2">
@@ -117,7 +114,7 @@ const Banner = () => {
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
-          className="min-h-[100vh] relative "
+          className="h-[70vh] relative "
         >
           <div className="absolute h-full w-full bg-black opacity-55"></div>
           <div className="z-10 w-4/5 mx-auto space-y-2">
