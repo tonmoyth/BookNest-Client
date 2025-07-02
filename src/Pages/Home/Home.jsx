@@ -6,6 +6,7 @@ import Service from "./Service/Service";
 import ReviewTestimonial from "./ReviewTestimonial/ReviewTestimonial";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import Header from "../../Components/Header/Header";
 
 
 const Home = () => {

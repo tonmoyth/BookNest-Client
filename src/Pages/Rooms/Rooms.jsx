@@ -70,7 +70,7 @@ const Rooms = () => {
 
       <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-accent-content">
         <h1 className="text-3xl font-semibold text-center text-primary">
-          Price range
+         Select your Price range
         </h1>
         <form onSubmit={handlePriceRangeForm} className="space-y-6">
           <div className="space-y-1 text-sm">
@@ -107,7 +107,7 @@ const Rooms = () => {
         </form>
       </div>
 
-      <div className="flex justify-center pt-6 lg:justify-end w-10/12  mx-auto">
+      <div className="flex  pt-6 justify-end w-10/12  mx-auto">
         <select
           onChange={(e) => setOrder(e.target.value)}
           defaultValue="Pick a font"

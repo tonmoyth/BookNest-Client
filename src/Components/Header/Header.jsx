@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import NavBerButton from "../SliderButton/NavBerButton";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
@@ -7,15 +7,39 @@ import logo from "../../assets/logo.png";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { PiHouseSimpleBold } from "react-icons/pi";
-import { MdOutlineOtherHouses } from "react-icons/md";
+import { MdOutlineOtherHouses, MdReviews } from "react-icons/md";
 import { LuLogIn } from "react-icons/lu";
 import { TfiGallery } from "react-icons/tfi";
+
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import {
+  ArchiveBoxXMarkIcon,
+  ChevronDownIcon,
+  PencilIcon,
+  Square2StackIcon,
+  TrashIcon,
+} from '@heroicons/react/16/solid'
 
 const Header = () => {
   const { pathname } = useLocation();
   const { user, userSignOut } = useContext(AuthContext);
   const [show, setShow] = useState(false);
+  const containerRef = useRef(null);
   const [isScrolled,setIsScrolled] = useState(false);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setShow(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
 
    useEffect(() => {
@@ -92,12 +116,20 @@ const Header = () => {
           Gallery
         </NavLink>
       </li>
+      <li className="hover:text-primary">
+        <NavLink
+          className={({ isActive }) => isActive && "border-b-2 border-secondary"}
+          to="/blog"
+        >
+          Blog
+        </NavLink>
+      </li>
     </>
   );
   return (
     <div>
       <div
-        className={`navbar transition-all duration-300 px-8 z-50 text-primary fixed top-0  ${
+        className={`navbar transition-all duration-300 px-4 lg:px-12 z-50 text-primary fixed top-0  ${
           pathname === "/" ? "" : "bg-accent-content text-primary"
         }${isScrolled && 'bg-accent-content text-primary'}`}
       >
@@ -110,26 +142,24 @@ const Header = () => {
             </div>
           </Link>
           <div className="absolute top-4 right-6">
-            <button
-              className="lg:hidden"
-              onClick={() => setShow((prev) => !prev)}
-            >
-              {show ? (
-                <RxCross2 size={30} />
-              ) : (
-                <IoReorderThreeOutline size={30} />
-              )}
-            </button>
+            
 
             {/* side ber */}
-            <div
-              className={`${
-                show
-                  ? "translate-x-0"
-                  : "translate-x-full"
-              } fixed top-17 right-0 z-50 h-[vh40] w-60 bg-secondary p-3 space-y-2 text-primary transition-transform duration-300 ease-in-out transform`}
-            >
-              {user && (
+          
+               {/* <div className="fixed top-24 w-52 text-right"> */}
+      <Menu>
+        <MenuButton className="inline-flex items-center lg:hidden gap-2 rounded-md  px-3 py-1.5 text-sm/6 font-semibold text-primary focus:not-data-focus:outline-none data-focus:outline  ">
+          <IoReorderThreeOutline size={30} />
+          
+        </MenuButton>
+
+        <MenuItems
+          transition
+          anchor="bottom end"
+          className="w-52 origin-top-right z-100 rounded-xl   bg-secondary p-1 text-sm text-primary transition duration-100 ease-out [--anchor-gap:--spacing(1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0"
+        >
+          <MenuItem>
+             {user && (
                 <div className="flex items-center p-2 space-x-4">
                   <img
                     referrerPolicy="no-referrer"
@@ -145,8 +175,9 @@ const Header = () => {
                   </div>
                 </div>
               )}
-              <div>
-                <ul className="pt-2 pb-4 space-y-1 text-sm">
+          </MenuItem>
+          <MenuItem>
+             <ul className="pt-2 pb-4 space-y-1 text-sm">
                   <li>
                     <NavLink
                       to="/"
@@ -219,29 +250,28 @@ const Header = () => {
                       <span>Gallery</span>
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink
+                      to="/blog"
+                      rel="noopener noreferrer"
+                      href="#"
+                      className={({ isActive }) =>
+                        `flex items-center p-2 space-x-3 rounded-md ${
+                          isActive && "bg-primary text-accent"
+                        }`
+                      }
+                    >
+                      <span>
+                        <MdReviews size={21}/>
+                      </span>
+                      <span>Blog</span>
+                    </NavLink>
+                  </li>
                 </ul>
-
-                {/* about  */}
-                <div className="space-y-2 my-2 ml-2">
-                  <h2 className="text-sm font-semibold tracking-widest uppercase ">
-                    About Us
-                  </h2>
-                  <div className="flex flex-col space-y-4">
-                    <NavLink rel="noopener noreferrer" href="#">
-                      About Hotel
-                    </NavLink>
-                    <NavLink rel="noopener noreferrer" href="#">
-                      Rooms & Suites
-                    </NavLink>
-                    <NavLink rel="noopener noreferrer" href="#">
-                      Reservations
-                    </NavLink>
-                    <NavLink rel="noopener noreferrer" href="#">
-                      Latest Blog
-                    </NavLink>
-                  </div>
-                </div>
-                <ul className="pt-4 pb-2 space-y-1 text-sm">
+          </MenuItem>
+          <div className="my-1 h-px bg-white/5" />
+          <MenuItem>
+            <ul className="pt-4 pb-2 space-y-1 text-sm">
                   {user ? (
                     <li onClick={handleSignOutButton}>
                       <a
@@ -276,8 +306,16 @@ const Header = () => {
                     </li>
                   )}
                 </ul>
-              </div>
-            </div>
+          </MenuItem>
+         
+        </MenuItems>
+      </Menu>
+    {/* </div> */}
+
+
+
+
+
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -318,3 +356,5 @@ const Header = () => {
 };
 
 export default Header;
+
+

@@ -1,12 +1,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router";
-import { FaFacebook, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaLinkedinIn, FaPhoneAlt, FaTwitter } from "react-icons/fa";
 import logo from '../../assets/logo.png'
+import { MdOutlineEmail } from "react-icons/md";
 
 const Footer = () => {
   const {pathname} = useLocation()
   return (
-    <footer className={`footer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:footer-horizontal ${pathname === '/' ? 'bg-accent' : 'bg-accent-content'} bg-accent text-white  p-6`}>
+    <footer className={`footer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:footer-horizontal ${pathname === '/' ? 'bg-accent' : 'bg-accent-content'} bg-accent text-white  p-6`}>
       <aside>
         <div>
           <Link to='/' className="text-2xl md:text-3xl flex items-center gap-1">
@@ -22,21 +23,13 @@ const Footer = () => {
         
       </aside>
       <nav>
-        <h6 className="footer-title">About Us</h6>
-        <Link className="link link-hover">About Hotel</Link>
-        <Link className="link link-hover">Rooms & Suites</Link>
-        <Link className="link link-hover">Reservations</Link>
-        <Link className="link link-hover">Latest Blog</Link>
+        <h6 className="footer-title">Contact</h6>
+        <p className="flex gap-2"><FaPhoneAlt size={18}/>+880 1407641417</p>
+        <p className="flex gap-2"><MdOutlineEmail size={20}/>tonmoynht1930@gmail.com</p>
       </nav>
+     
       <nav>
-        <h6 className="footer-title">Usefull Links</h6>
-        <Link className="link link-hover">Booking</Link>
-        <Link className="link link-hover">Testimonials</Link>
-        <Link className="link link-hover">Privecy Policy</Link>
-        <Link className="link link-hover">FAQ's</Link>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Follow Us On :</h6>
+        <h6 className="footer-title">Follow Us On </h6>
         <nav className="flex gap-4">
           <Link
             to="https://www.facebook.com/nurislamhasantonmoyth"

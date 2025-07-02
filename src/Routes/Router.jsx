@@ -10,6 +10,8 @@ import MyBookings from "../Pages/MyBookings/MyBookings";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../Components/404page/ErrorPage";
 import Gallery from "../Pages/Gallery/Gallery";
+import Blog from "../Pages/Blog/Blog";
+import BlogDetails from "../Pages/Blog/BlogDetails";
 
 export const router = createBrowserRouter([
     {
@@ -38,6 +40,15 @@ export const router = createBrowserRouter([
             {
                 path: 'gallery',
                 Component: Gallery
+            },
+            {
+                path:'blog',
+                Component:Blog
+            },
+            {
+                path: 'blog/:id',
+                Component:BlogDetails,
+                loader:() => fetch('/blog.json')
             },
             {
                 path: 'signin',
