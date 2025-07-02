@@ -21,7 +21,7 @@ const OurHotel = () => {
       <div className="grid md:grid-cols-2 overflow-hidden gap-6 items-center lg:w-11/12 mx-auto">
         {/* Left Content */}
         <div 
-        data-aos="fade-right"
+        
         >
           
           <p className="uppercase text-sm text-primary font-semibold flex gap-2 tracking-widest mb-3">
@@ -52,7 +52,7 @@ const OurHotel = () => {
 
         {/* Right Content */}
         <div
-        data-aos="fade-left"
+       
         className="relative">
           <img
             src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"
