@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const BlogCard = ({ blog }) => {
   const { id, author, title, date, views, image } = blog;
   return (
-    <div className="lg:w-11/12 mx-auto min-h-screen">
+    
       <Link
         data-aos="fade-up"
         to={`/blog/${id}`}
@@ -35,7 +35,7 @@ const BlogCard = ({ blog }) => {
           </div>
         </div>
       </Link>
-    </div>
+    
   );
 };
 
