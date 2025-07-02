@@ -17,7 +17,7 @@ const BlogDetails = () => {
    
     return (
         <div className="min-h-screen pt-20 p-6">
-            <section className="w-10/12 mx-auto px-4 py-10">
+            <section className="lg:w-10/12 mx-auto px-4 py-10">
       {/* Back Button */}
       <div className='mb-6'>
         <NavBerButton onClick={() => navigate(-1)} level={`Back to Blog`}></NavBerButton>

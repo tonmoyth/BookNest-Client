@@ -22,9 +22,7 @@ const Rooms = () => {
       try {
         const { data } = await secureAxios.post(`/order`, { orderData: order });
         setRooms(data);
-        console.log(data)
       } catch (err) {
-        console.log(err)
         Swal.fire({
           icon: "error",
           title: "Oops...",
