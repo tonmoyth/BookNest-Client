@@ -149,7 +149,7 @@ const Header = () => {
         <div className="navbar-start">
           <Link to="/" className="text-2xl">
             <div className="flex gap-1 items-center">
-              <img src={logo} alt="" />
+              <img className="w-[40px]" src={logo} alt="" />
               <span className="text-primary">Book</span>
               <span className="text-primary font-bold">Nest</span>
             </div>

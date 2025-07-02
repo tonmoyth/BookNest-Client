@@ -60,7 +60,7 @@ const OurHotel = () => {
             className="rounded-lg w-full object-cover h-[400px]"
           />
 
-          <div className="absolute bottom-[-40px] left-1 lg:-left-6 bg-secondary p-6 rounded-lg shadow-lg">
+          <div className="absolute bottom-[0px] md:-left-8 lg:-left-6 bg-secondary p-6 rounded-lg shadow-lg">
             <div className="flex items-center gap-3">
               <div className="text-white text-2xl">
                 <IoStarOutline size={30} />
