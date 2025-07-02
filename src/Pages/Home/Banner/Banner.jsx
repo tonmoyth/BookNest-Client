@@ -63,7 +63,7 @@ const Banner = () => {
           className="h-[70vh] relative"
         >
           <div className="absolute h-full w-full bg-black opacity-55"></div>
-          <div className="z-10 w-4/5 mx-auto space-y-2">
+          <div data-aos="fade-up" className="z-10 w-4/5 mx-auto space-y-2">
             <h1
               className=" font-bold md:text-2xl lg:text-4xl mx-auto md:font-semibold lg:font-bold"
             >

@@ -5,10 +5,10 @@ import { FaPhoneAlt, FaPlane, FaWifi, FaDumbbell, FaBed } from "react-icons/fa";
 const Service = () => {
   return (
     <section className="bg-accent text-primary p-6 py-10 lg:py-12 lg:p-0  ">
-      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10 lg:w-11/12 mx-auto items-start">
+      <div className="grid overflow-hidden md:grid-cols-1 lg:grid-cols-2 gap-10 lg:w-11/12 mx-auto items-start">
         {/* Left Side */}
         <div
-          
+          data-aos="fade-right"
         >
           <p className="text-primary tracking-widest mb-2">➜ SERVICE</p>
           <h2 className="text-2xl text-primary md:text-4xl font-bold leading-tight mb-6">
@@ -30,7 +30,7 @@ const Service = () => {
         </div>
 
         {/* Right Side */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-hidden">
+        <div  data-aos="fade-left" className="grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-hidden">
           {/* Transportations */}
           <div
             className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl "
@@ -44,6 +44,7 @@ const Service = () => {
 
           {/* Wi-Fi and Internet */}
           <div
+           data-aos="fade-left"
             className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl"
           >
             <div className="text-primary text-3xl mb-4">{<FaWifi />}</div>
@@ -56,7 +57,7 @@ const Service = () => {
           {/* Gym Facilities */}
 
           <div
-           
+            data-aos="fade-left"
             className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl"
           >
             <div className="text-primary text-3xl mb-4">{<FaDumbbell />}</div>
@@ -68,7 +69,7 @@ const Service = () => {
 
           {/* Room Services */}
           <div
-            
+             data-aos="fade-left"
             className="bg-accent-content p-6 rounded-md shadow transition duration-300 transform hover:scale-105 group hover:shadow-xl"
           >
             <div className="text-primary text-3xl mb-4">{<FaBed />}</div>

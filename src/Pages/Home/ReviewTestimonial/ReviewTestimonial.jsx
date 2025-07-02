@@ -28,7 +28,7 @@ const ReviewTestimonial = () => {
   return (
     <div className="bg-accent py-10 lg:py-12">
       <div
-       
+       data-aos="fade-up"
         className="p-6 lg:w-11/12 mx-auto lg:pl-0"
       >
         <p className="text-primary font-bold">➜ Testimonals</p>

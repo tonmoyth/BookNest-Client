@@ -142,7 +142,7 @@ const Header = () => {
   return (
     <div>
       <div
-        className={`navbar transition-all duration-300 px-4 lg:px-12 z-50 text-primary fixed top-0  ${
+        className={`navbar transition-all duration-300 px-4 lg:px-13 z-50 text-primary fixed top-0  ${
           pathname === "/" ? "" : "bg-accent-content text-primary"
         }${isScrolled && "bg-accent-content text-primary"}`}
       >

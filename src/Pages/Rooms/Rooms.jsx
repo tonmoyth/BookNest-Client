@@ -68,7 +68,7 @@ const Rooms = () => {
       </Helmet>
       {/* range form */}
 
-      <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-accent-content">
+      <div data-aos="fade-up" className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-accent-content">
         <h1 className="text-3xl font-semibold text-center text-primary">
          Select your Price range
         </h1>
@@ -107,7 +107,7 @@ const Rooms = () => {
         </form>
       </div>
 
-      <div className="flex  pt-6 justify-end w-10/12  mx-auto">
+      <div data-aos="fade-up" className="flex  pt-6 justify-end w-10/12  mx-auto">
         <select
           onChange={(e) => setOrder(e.target.value)}
           defaultValue="Pick a font"

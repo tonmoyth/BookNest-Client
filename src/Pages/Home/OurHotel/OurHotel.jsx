@@ -4,6 +4,7 @@ import SliderButton from "../../../Components/SliderButton/SliderButton";
 import { IoStarOutline } from "react-icons/io5";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { Link } from "react-router";
 
 
 
@@ -17,10 +18,10 @@ const OurHotel = () => {
 
       className="bg-accent text-primary p-6 lg:p-0 py-10 lg:py-12"
     >
-      <div className="grid md:grid-cols-2 gap-6 items-center lg:w-11/12 mx-auto">
+      <div className="grid md:grid-cols-2 overflow-hidden gap-6 items-center lg:w-11/12 mx-auto">
         {/* Left Content */}
         <div 
-      
+        data-aos="fade-right"
         >
           
           <p className="uppercase text-sm text-primary font-semibold flex gap-2 tracking-widest mb-3">
@@ -44,11 +45,14 @@ const OurHotel = () => {
             </span>
           </div>
 
-          <SliderButton level="MORE ABOUT"></SliderButton>
+          <Link to='/rooms'>
+            <SliderButton level="See Rooms"></SliderButton>
+          </Link>
         </div>
 
         {/* Right Content */}
         <div
+        data-aos="fade-left"
         className="relative">
           <img
             src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"

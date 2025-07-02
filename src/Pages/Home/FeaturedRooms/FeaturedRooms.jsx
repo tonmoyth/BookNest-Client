@@ -15,6 +15,7 @@ const FeaturedRooms = () => {
   return (
     <div className="py-10 lg:py-12 bg-accent">
       <h1
+      data-aos="fade-up"
         className="text-2xl lg:text-4xl mb-6 font-bold text-center text-primary"
       >
         Sleep in Comfort Choose From <br /> Our Rooms & Suites

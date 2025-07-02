@@ -17,7 +17,7 @@ const RoomCard = ({ room }) => {
   } = room;
   return (
     <div
-     
+     data-aos="fade-up"
       onClick={() => navigate(`/room/${_id}`)}
       className="flex cursor-pointer flex-col md:h-58 hover:scale-105 hover:shadow-xl overflow-hidden transition duration-300 transform md:flex-row bg-secondary rounded-xl shadow-md  "
     >

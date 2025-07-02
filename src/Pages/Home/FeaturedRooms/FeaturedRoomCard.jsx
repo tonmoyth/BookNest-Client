@@ -7,7 +7,7 @@ const FeaturedRoomCard = ({room}) => {
     const {_id,image,roomType,rating,description,pricePerNight} = room
     return (
         <div
-        
+        data-aos="fade-up"
         className="card bg-base-100 shadow-xl rounded-xl overflow-hidden">
       <figure className="relative">
         <img src={image} loading="lazy" alt="Dining Spot" className="h-56 w-full object-cover hover:scale-105 overflow-hidden transition duration-300 transform" />
