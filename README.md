@@ -1,6 +1,4 @@
-# Project Name
-
-BookNest
+# BookNest
 
 ## 🌐 Live URL
 
